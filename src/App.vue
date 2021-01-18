@@ -1,32 +1,48 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
+    <!-- 页面主要有四个部分组成：头部、侧面导航栏、底部播放控件、内容区域 -->
+		
+		<!-- 头部 -->
+		<Header></Header>
+		
+		<!-- 侧边导航栏 -->
+		<SideBar></SideBar>
+		
+		<!-- 内容区域 -->
+		<Content>
+			<router-view></router-view>
+		</Content>
+		
+		<!-- 底部播放控件 -->
+		<ControlBar></ControlBar>
   </div>
 </template>
 
+<script>
+	import Header from'@/components/main/Header'
+	import SideBar from'@/components/main/SideBar'
+	import Content from '@/components/main/Content'
+	import ControlBar from '@/components/main/ControlBar'
+	export default{
+		components:{
+			Header,
+			SideBar,
+			Content,
+			ControlBar
+		},
+		data(){
+			return {}
+		},
+		
+	}
+</script>
+
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+	
+	@import url("//at.alicdn.com/t/font_2271023_ttddmxjs5l.css");
+	*{
+		padding: 0;
+		margin: 0;
+	}
 
-#nav {
-  padding: 30px;
-}
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
 </style>
