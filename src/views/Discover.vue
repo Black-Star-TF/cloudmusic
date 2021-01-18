@@ -3,8 +3,8 @@
 		<!-- 发现音乐页面的顶部导航栏 -->
 		<nav class="discover-nav">
 			<router-link to="/discover/recommand" class="discover-nav-item" tag="div">个性推荐</router-link>
-			<router-link to="/discover/songlist" class="discover-nav-item" tag="div">歌单</router-link>
-			<router-link to="/discover/radio" class="discover-nav-item" tag="div">主播电台</router-link>
+			<router-link to="/discover/playlist" class="discover-nav-item" tag="div">歌单</router-link>
+			<router-link to="/discover/djprogram" class="discover-nav-item" tag="div">主播电台</router-link>
 			<router-link to="/discover/toplist" class="discover-nav-item" tag="div">排行榜</router-link>
 			<router-link to="/discover/singer" class="discover-nav-item" tag="div">歌手</router-link>
 			<router-link to="/discover/newest" class="discover-nav-item" tag="div">最新音乐</router-link>

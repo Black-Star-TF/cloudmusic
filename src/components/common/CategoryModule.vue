@@ -61,13 +61,11 @@
 	/* 头部标题样式 */
 	.category-module-head>.title{
 		height: 100%;
-		cursor: pointer;
 		color: #d0d0d0;
+		position: relative;
+		font-weight: 600;
 	}
-	
-	.category-module-head>.title:hover{
-		color: #fff;
-	}
+
 	
 	/* 分类目录面板样式 */
 	.category-module-head>.catalogue{

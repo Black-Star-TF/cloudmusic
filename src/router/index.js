@@ -23,12 +23,12 @@ const routes = [
 				component: ()=>import('@/views/Discover/Recommend')
 			},
 			{
-				path: 'songlist',
-				component: ()=>import('@/views/Discover/SongList')
+				path: 'playlist',
+				component: ()=>import('@/views/Discover/Playlist')
 			},
 			{
-				path: 'radio',
-				component: ()=>import('@/views/Discover/Radio')
+				path: 'djprogram',
+				component: ()=>import('@/views/Discover/DJProgram')
 			},
 			{
 				path: 'toplist',

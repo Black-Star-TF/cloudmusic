@@ -39,10 +39,17 @@
 
 <style>
 	
-	@import url("//at.alicdn.com/t/font_2271023_ttddmxjs5l.css");
+	@import url("//at.alicdn.com/t/font_2271023_02vf3d3r4tn9.css");
+	
 	*{
 		padding: 0;
 		margin: 0;
+	}
+	
+	.clearfix::after{
+		content: "";
+		display: block;
+		clear: both;
 	}
 
 </style>
