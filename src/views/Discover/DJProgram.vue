@@ -15,7 +15,7 @@
 			</template>
 		</CategoryModule>
 		
-		<!-- 电台个性推荐 -->
+		<!-- 电台个性推荐内容-->
 		<CategoryModule v-if="show">
 			<template slot="title">电台个性推荐</template>
 			<template slot="content">
@@ -23,7 +23,7 @@
 			</template>
 		</CategoryModule>
 		
-		<!-- 电台分类推荐 -->
+		<!-- 电台分类推荐内容 -->
 		<CategoryModule v-for="DJCate in DJCategoryCommendList" v-if="show">
 			<template slot="title"><div class="link">{{DJCate.name}}</div></template>
 			<template slot="content">
@@ -34,12 +34,12 @@
 </template>
 
 <script>
-	import {getDJBanner,getDJPay,getDJCategory,getDJCategoryRecommend} from '@/network/Discover/djProgram'
-	import {getRecommendDJProgram} from '@/network/Discover/recommend'
-	import Slider from '@/components/common/Slider'
-	import CategoryModule from '@/components/common/CategoryModule'
-	import PayRadioItem from '@/components/DJProgram/PayRadioItem'
-	import DJProgramItem from '@/components/DJProgram/DJProgramItem'
+	import {getDJBanner,getDJPay,getDJCategory,getDJCategoryRecommend} from '@/network/Discover/djProgram';
+	import {getRecommendDJProgram} from '@/network/Discover/recommend';
+	import Slider from '@/components/common/Slider';
+	import CategoryModule from '@/components/common/CategoryModule';
+	import PayRadioItem from '@/components/DJProgram/PayRadioItem';
+	import DJProgramItem from '@/components/DJProgram/DJProgramItem';
 	export default {
 		name: 'DJProgram',
 		data(){
@@ -89,7 +89,7 @@
 					for(const item of this.DJSubCategory){
 						if(DJCate.name == item){
 							getDJCategoryRecommend(DJCate.id).then(res=>{
-								this.DJCategoryCommendList.push({name:DJCate.name, DJPrograms: res.djRadios})
+								this.DJCategoryCommendList.push({name:DJCate.name, DJPrograms: res.djRadios});
 							})
 						}
 					}
@@ -97,7 +97,6 @@
 			});
 		}
 	}
-	
 </script>
 
 <style>

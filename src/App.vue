@@ -9,7 +9,7 @@
 		<SideBar></SideBar>
 		
 		<!-- 内容区域 -->
-		<Content>
+		<Content ref="content">
 			<router-view></router-view>
 		</Content>
 		
@@ -30,10 +30,9 @@
 			Content,
 			ControlBar
 		},
-		data(){
-			return {}
-		},
-		
+		mounted(){
+			
+		}
 	}
 </script>
 

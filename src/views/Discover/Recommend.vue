@@ -46,14 +46,14 @@
 </template>
 
 <script>
-	import {getBanner,getRecommendPlaylist,getExclusiveVideo,getRecommendMV,getRecommendDJProgram} from '@/network/Discover/recommend.js'
-	import Slider from '@/components/common/Slider'
-	import PlaylistItem from '@/components/playlist/PlaylistItem'
-	import VideoItem from '@/components/video/VideoItem'
-	import DJProgramItem from '@/components/DJProgram/DJProgramItem.vue'
-	import CategoryModule from '@/components/common/CategoryModule'
-	import ExclusiveVideoItem from '@/components/video/ExclusiveVideoItem'
-	import Loading from '@/components/common/Loading'
+	import {getBanner,getRecommendPlaylist,getExclusiveVideo,getRecommendMV,getRecommendDJProgram} from '@/network/Discover/recommend';
+	import Slider from '@/components/common/Slider';
+	import PlaylistItem from '@/components/playlist/PlaylistItem';
+	import VideoItem from '@/components/video/VideoItem';
+	import DJProgramItem from '@/components/DJProgram/DJProgramItem.vue';
+	import CategoryModule from '@/components/common/CategoryModule';
+	import ExclusiveVideoItem from '@/components/video/ExclusiveVideoItem';
+	import Loading from '@/components/common/Loading';
 	export default {
 		name: 'Recommend',
 		data(){

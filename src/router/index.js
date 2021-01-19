@@ -40,7 +40,21 @@ const routes = [
 			},
 			{
 				path: 'newest',
-				component: ()=>import('@/views/Discover/Newest')
+				component: ()=>import('@/views/Discover/Newest'),
+				children:[
+					{
+						path: '',
+						redirect: 'newestsong'
+					},
+					{
+						path: 'newestsong',
+						component: ()=>import('@/views/Discover/newest/NewestSong'),
+					},
+					{
+						path: 'newestalbum',
+						component: ()=>import('@/views/Discover/newest/NewestAlbum'),
+					}
+				]
 			}
 		]
 	},

@@ -1,5 +1,5 @@
 <template>
-	<div class="app-content">
+	<div class="app-content" ref="main">
 		<slot></slot>
 	</div>
 </template>

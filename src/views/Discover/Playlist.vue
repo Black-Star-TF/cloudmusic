@@ -2,9 +2,11 @@
 	<div class="playlist">
 		<CategoryModule v-if="show">
 			<template slot="title">
+				<!-- 显示当前歌单分类 -->
 				<div class="title-tag" @click.stop="changePanelState">{{playlistTag}}</div>
 				</template>
 			<template slot="catalogue">
+				<!-- 歌单分类面板 -->
 				<CateloguePanel :totalTagName="totalTagName" :currentTagName="playlistTag" v-if="showCateloguePanel" @tagclick="change">
 					<template slot="category">
 						<PlaylistCategory v-for="(name,id) in categories" :category="{id, name}" :subCate="playlistCategory" :currentTag="playlistTag" @tagChange="change"></PlaylistCategory>
@@ -13,12 +15,14 @@
 			</template>
 			
 			<template slot="shortcut">
+				<!-- 显示歌单热门分类 -->
 				<div class="hot-playlist-tag">
 					<span v-for="tag in hotCategory" :class="{'active': playlistTag==tag.name}" @click="hotCategoryClick(tag.name)">{{tag.name}}</span>
 				</div>
 			</template>
 			
 			<template slot="content">
+				<!-- 歌单列表 -->
 				<PlaylistItem v-for="playlist in playlists" :playlist="playlist" v-if="playlists"></PlaylistItem>
 			</template>
 		</CategoryModule>
@@ -26,6 +30,7 @@
 		<!-- 页码导航 -->
 		<PageNumBtn :pageNum="pageNum" :totalPage="totalPage" @pagebtnclick="turnPage" v-if="playlists"></PageNumBtn>
 		
+		<!-- 加载动画 -->
 		<div class="loading" v-if="!playlists">
 			<Loading></Loading>
 		</div>
@@ -33,13 +38,13 @@
 </template>
 
 <script>
-	import {getHotCategory,getPlaylist,getPlaylistCategory} from '@/network/Discover/playlist'
-	import CategoryModule from '@/components/common/CategoryModule'
-	import CateloguePanel from '@/components/common/CateloguePanel'
-	import PlaylistCategory from '@/components/playlist/PlaylistCategory'
-	import PlaylistItem from '@/components/playlist/PlaylistItem.vue'
-	import PageNumBtn from '@/components/common/PageNumBtn'
-	import Loading from '@/components/common/Loading'
+	import {getHotCategory,getPlaylist,getPlaylistCategory} from '@/network/Discover/playlist';
+	import CategoryModule from '@/components/common/CategoryModule';
+	import CateloguePanel from '@/components/common/CateloguePanel';
+	import PlaylistCategory from '@/components/playlist/PlaylistCategory';
+	import PlaylistItem from '@/components/playlist/PlaylistItem';
+	import PageNumBtn from '@/components/common/PageNumBtn';
+	import Loading from '@/components/common/Loading';
 	export default {
 		name: 'Playlist',
 		data(){
@@ -102,7 +107,7 @@
 			},
 			totalPage(){
 				if(this.playlistNum != null){
-					return Math.ceil(this.playlistNum/this.limit)
+					return Math.ceil(this.playlistNum/this.limit);
 				}else{
 					return 0
 				}
@@ -127,7 +132,7 @@
 			// 获取歌单数据
 			this.getPlaylistData();
 			
-			// 添加鼠标点击事件
+			// 添加鼠标点击事件 当点击歌单分类面板以外的地方关闭歌单分类面板
 			document.addEventListener('click',()=>{
 				this.showCateloguePanel = false;
 			})
