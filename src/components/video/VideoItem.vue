@@ -1,7 +1,8 @@
 <template>
 	<div class="video-item" :style="itemStyle">
 		<!-- 视频封面 -->
-		<img :src="video.picUrl" class="video-cover">
+		<img :src="video.picUrl||video.cover" class="video-cover-img" @load="load" ref="img">
+		
 		<!-- 视频名称 -->
 		<div class="video-name">{{video.name}}</div>
 		<!-- 视频作家 -->
@@ -13,7 +14,7 @@
 		<div class="video-play-count"><span class="iconfont icon-bofang1"></span> {{playCount}}</div>
 		
 		<!-- 文案 -->
-		<div class="video-copywriter">{{video.copywriter}}</div>
+		<div class="video-copywriter" v-if="copywriter">{{video.copywriter}}</div>
 	</div>
 </template>
 
@@ -27,6 +28,16 @@
 			},
 			columns:{
 				default: 3
+			},
+			copywriter:{
+				default: false
+			}
+		},
+		methods:{
+			load(){
+				if(this.$refs.img){
+					this.$refs.img.height = 0.56 * this.$refs.img.width;
+				}
 			}
 		},
 		computed:{
@@ -49,8 +60,12 @@
 		position: relative;
 		overflow: hidden;
 	}
-	
 	.video-cover{
+		width: 100%;
+		height: 59%;
+		overflow: hidden;
+	}
+	.video-cover-img{
 		width: 100%;
 		display: block;
 		cursor: pointer;

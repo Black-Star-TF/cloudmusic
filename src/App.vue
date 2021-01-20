@@ -10,7 +10,7 @@
 		
 		<!-- 内容区域 -->
 		<Content ref="content">
-			<router-view></router-view>
+			<router-view :key="$route.fullPath"></router-view>
 		</Content>
 		
 		<!-- 底部播放控件 -->
@@ -38,7 +38,7 @@
 
 <style>
 	
-	@import url("//at.alicdn.com/t/font_2271023_02vf3d3r4tn9.css");
+	@import url("//at.alicdn.com/t/font_2271023_6xny3crx02.css");
 	
 	*{
 		padding: 0;

@@ -28,3 +28,13 @@ export function getPlaylist(cat,limit,offset=0,order=null){
 		}
 	})
 }
+
+// 请求歌单详情数据
+export function getPlaylistDetail(id){
+	return request({
+		url: '/playlist/detail',
+		params: {
+			id
+		}
+	})
+}

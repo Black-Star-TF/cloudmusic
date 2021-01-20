@@ -15,7 +15,7 @@
 				</div>
 			</template>
 			<template slot="content">
-				<NewestSongListItem v-for="(songItem,index) in newestSongs" :newSongItem="songItem" :index="index+1" v-if="newestSongs"></NewestSongListItem>
+				<!-- <NewestSongListItem v-for="(songItem,index) in newestSongs" :newSongItem="songItem" :index="index+1" v-if="newestSongs"></NewestSongListItem> -->
 			</template>
 		</CategoryModule>
 		

@@ -15,7 +15,7 @@
 		<CategoryModule  v-if="show">
 			<template slot="title"><div class="link">独家放送</div></template>
 			<template slot="content">
-				<ExclusiveVideoItem v-for="exclusiveVideo in exclusiveVideos" :exclusiveVideo="exclusiveVideo"></ExclusiveVideoItem>
+				<ExclusiveVideoItem v-for="exclusiveVideo in exclusiveVideos" :exclusiveVideo="exclusiveVideo" playIcon></ExclusiveVideoItem>
 			</template>
 		</CategoryModule>
 		

@@ -1,11 +1,11 @@
 <template>
 	<div class="singer">
 		<!-- 歌手分类导航 -->
-		<SingerTypeNav :category="category" :currentCategory="currentCategory" @typechange="change"></SingerTypeNav>
+		<TypeNav :category="category" :currentCategory="currentCategory" @typechange="change"></TypeNav>
 		<!-- 歌手列表 -->
 		<CategoryModule>
 			<template slot="content">
-				<SingerListItem v-for="singer in singerList" :singer="singer" v-if="singerList"></SingerListItem>
+				<!-- <SingerListItem v-for="singer in singerList" :singer="singer" v-if="singerList"></SingerListItem> -->
 			</template>
 		</CategoryModule>
 		<Loading v-if="!singerList"></Loading>
@@ -15,13 +15,13 @@
 <script>
 	import {getSingerList} from '@/network/Discover/singer.js';
 	import CategoryModule from '@/components/common/CategoryModule';
-	import SingerTypeNav from '@/components/singer/SingerTypeNav';
+	import TypeNav from '@/components/common/TypeNav';
 	import SingerListItem from '@/components/singer/SingerListItem';
 	import Loading from '@/components/common/Loading';
 	export default {
 		name: 'Singer',
 		components:{
-			SingerTypeNav,
+			TypeNav,
 			SingerListItem,
 			Loading,
 			CategoryModule

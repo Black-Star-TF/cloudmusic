@@ -3,12 +3,17 @@
 	<div class="exclusive-video-item" :style="itemStyle">
 		
 		<!-- 封面 -->
-		<img :src="exclusiveVideo.sPicUrl" class="exclusive-video-cover">
+		<img :src="exclusiveVideo.sPicUrl||exclusiveVideo.cover" class="exclusive-video-cover">
+		<!-- 图标 -->
+		<div class="icon-play" v-if="playIcon"><span class="iconfont icon-bofang2"></span></div>
+		<!-- 播放量 -->
+		<div class="exclusive-video-play-count" v-if="playCount"><span class="iconfont icon-bofang1"></span> {{playCount}}</div>
+
+		
 		<!-- 名称 -->
 		<div class="exclusive-video-name">{{exclusiveVideo.name}}</div>
 		
-		<!-- 图标 -->
-		<div class="icon-play"><span class="iconfont icon-bofang2"></span></div>
+		
 	</div>
 </template>
 
@@ -22,6 +27,14 @@
 			},
 			columns:{
 				default: 3
+			},
+			playIcon:{
+				type: Boolean,
+				default: false
+			},
+			showPlayCount:{
+				type: Boolean,
+				default: false
 			}
 		},
 		computed:{
@@ -29,6 +42,9 @@
 				return{
 					width: `calc(100%/${this.columns} - 10px)`
 				}
+			},
+			playCount(){
+				return this.exclusiveVideo.playCount >= 100000 ? Math.floor(this.exclusiveVideo.playCount/10000) + '万': this.exclusiveVideo.playCount;
 			}
 		}
 	}
@@ -78,5 +94,20 @@
 		color: #fff;
 		position: relative;
 		left: 1px;
+		line-height: 19px;
+	}
+	
+	.exclusive-video-play-count{
+		position: absolute;
+		font-size: 12px;
+		color: #fff;
+		top: 3px;
+		right: 7px;
+		cursor: pointer;
+		transition: all .1s linear .3s; 
+	}
+	
+	.exclusive-video-play-count>.iconfont{
+		font-size: 12px;
 	}
 </style>

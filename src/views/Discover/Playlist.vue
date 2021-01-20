@@ -114,6 +114,7 @@
 			}
 		},
 		created(){
+			this.playlistTag = this.$route.query.tag || this.playlistTag
 			// 获取热门歌单分类
 			getHotCategory().then(res=>{
 				this.hotCategory = res.tags;

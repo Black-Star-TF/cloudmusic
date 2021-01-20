@@ -2,7 +2,7 @@
 	<!-- 分类导航 -->
 	<div class="type-nav-container">
 		<!-- 类别 -->
-		<div class="type-nav-item clear-fix" v-for="type in category">
+		<div class="type-nav-item clearfix" v-for="type in category">
 			<div class="type-nav-item-category">{{type.name}}:</div>
 			<div class="right">
 				<div class="item" v-for="(value,key,index) in type.categoryList">
@@ -43,10 +43,9 @@
 	.type-nav-container{
 		width: 100%;
 		line-height: 20px;
-		height: 20px;
-		margin: 5px;
 		font-size: 12.5px;
 		color: #878787;
+		overflow: hidden;
 	}
 	
 	.type-nav-item-category{
@@ -64,7 +63,6 @@
 	.type-nav-item>.right>.item{
 		float: left;
 		margin-top: 10px;
-		/* padding: 0 5px; */
 		color: #999;
 	}
 	.type-nav-item .itemName{

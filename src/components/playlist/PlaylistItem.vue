@@ -3,19 +3,20 @@
 	<div class="playlist-item" :style="itemStyle">
 		<!-- 歌单封面 -->
 		<div class="playlist-cover-container">
-			<img :src="playlist.picUrl||playlist.coverImgUrl" class="playlist-cover">
+			<img :src="playlist.picUrl||playlist.coverImgUrl" class="playlist-cover" @click="toDetail">
 			
 			<!-- 播放按钮 -->
 			<div class="playlist-play-btn"><span class="iconfont icon-bofang2"></span></div>
 			
 			<!-- 歌单作者 -->
 			<div class="playlist-creator" v-if="showCreator">
-			<span class="iconfont icon-yonghu"></span>{{playlist.creator.nickname}}
-			<img class="playlist-creator-identity" :src="playlist.creator.avatarDetail.identityIconUrl" v-if="playlist.creator.avatarDetail"></div>
+				<span class="iconfont icon-yonghu"></span>{{playlist.creator.nickname}}
+				<img class="playlist-creator-identity" :src="playlist.creator.avatarDetail.identityIconUrl" v-if="playlist.creator.avatarDetail">
+			</div>
 		</div>
 		
 		<!-- 歌单名称 -->
-		<div class="playlist-name">{{playlist.name}}</div>
+		<div class="playlist-name" @click="toDetail">{{playlist.name}}</div>
 		<!-- 播放量 -->
 		<div class="playlist-play-count"><span class="iconfont icon-bofang1"></span> {{playCount}}</div>
 		
@@ -37,6 +38,16 @@
 			showCreator:{
 				type: Boolean,
 				default: true
+			}
+		},
+		methods:{
+			toDetail(){
+				this.$router.push({
+					path: '/playlistdetail',
+					query: {
+						id: this.playlist.id
+					}
+				})
 			}
 		},
 		computed:{
@@ -130,14 +141,14 @@
 		top: 2px;
 	}
 	
-	.playlist-name{
+	.playlist-item>.playlist-name{
 		line-height: 20px;
 		font-size: 14px;
 		color: #D0D0D0;
 		cursor: pointer;
 	}
 	
-	.playlist-name:hover{
+	.playlist-item>.playlist-name:hover{
 		color: #fff;
 	}
 	

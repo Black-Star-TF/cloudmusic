@@ -39,7 +39,7 @@
 <style>
 	.category-module{
 		width: 100%;
-		margin: 20px 0;
+		margin-top: 20px;
 		cursor: default;
 	}
 	

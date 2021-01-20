@@ -60,9 +60,64 @@ const routes = [
 	},
 	{
 		path: '/video',
-		component: ()=>import('@/views/Video')
+		component: ()=>import('@/views/Video'),
+		children: [
+			{
+				path: '',
+				redirect: 'mv'
+			},
+			{
+				path: 'video',
+				component: ()=>import('@/views/Video/Video')
+			},
+			{
+				path: 'mv',
+				component: ()=>import('@/views/Video/MV')
+			}
+		]
+	},
+	{
+		path: '/totalmv',
+		component: ()=>import('@/views/Video/TotalMV')
+	},
+	{
+		path: '/mvtoplist',
+		component: ()=>import('@/views/Video/MVTopList')
+	},
+	{
+		path: '/playlistdetail',
+		component: ()=>import('@/views/PlaylistDetail/PlaylistDetail'),
+		children: [
+			{
+				path: '',
+				redirect: 'songlist'
+			},
+			{
+				path: 'songlist',
+				component: ()=>import('@/views/PlaylistDetail/SongList')
+			},
+			{
+				path: 'comment',
+				component: ()=>import('@/views/PlaylistDetail/PlaylistDetail')
+			},
+			{
+				path: 'subscriber',
+				component: ()=>import('@/views/PlaylistDetail/PlaylistDetail')
+			}
+		]
+	},
+	{
+		path: '/videodetail',
+		component: ()=>import('@/views/Video/VideoDetail')
 	}
 ]
+
+//获取原型对象上的push函数
+const originalPush = VueRouter.prototype.push
+//修改原型对象中的push方法
+VueRouter.prototype.push = function push(location) {
+   return originalPush.call(this, location).catch(err => err)
+}
 
 const router = new VueRouter({
   mode: 'history',
