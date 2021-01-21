@@ -25,7 +25,7 @@
 		<CategoryModule  v-if="show">
 			<template slot="title"><div class="link">推荐MV</div></template>
 			<template slot="content">
-				<VideoItem v-for="(video,index) in recommendMVList"  v-if="index < 3" :video="video"></VideoItem>
+				<VideoItem v-for="(video,index) in recommendMVList"  v-if="index < 3" :video="video" copywriter></VideoItem>
 			</template>
 		</CategoryModule>
 		

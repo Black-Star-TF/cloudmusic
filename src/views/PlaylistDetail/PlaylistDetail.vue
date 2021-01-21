@@ -43,6 +43,19 @@
 			getPlaylistDetail(this.id).then(res=>{
 				this.playlist = res.playlist
 			})
+		},
+		beforeRouteEnter(to,from,next){
+			// to.meta.keepAlive = true;
+			// console.log('to',to);
+			// console.log('from',from);
+			// next(vw=>{
+			// 	vw.routerFrom = from.fullPath
+			// })
+			next()
+		},
+		beforeRouteLeave(to,from,next){
+			// from.meta.keepAlive = false
+			next()
 		}
 	}
 	

@@ -10,7 +10,10 @@
 		
 		<!-- 内容区域 -->
 		<Content ref="content">
-			<router-view :key="$route.fullPath"></router-view>
+			<keep-alive>
+				<router-view  v-if="$route.meta.keepAlive"></router-view>
+			</keep-alive>
+			<router-view ></router-view>
 		</Content>
 		
 		<!-- 底部播放控件 -->
@@ -37,8 +40,8 @@
 </script>
 
 <style>
-	
-	@import url("//at.alicdn.com/t/font_2271023_6xny3crx02.css");
+	/* 引入字体图标样式 */
+	@import url("//at.alicdn.com/t/font_2271023_hru77r2q2o.css");
 	
 	*{
 		padding: 0;

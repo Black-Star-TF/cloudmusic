@@ -1,11 +1,14 @@
 <template>
 	<div class="DJ-program-item" :style="itemStyle">
-		<!-- 电台封面 -->
-		<img :src="DJProgram.picUrl" class="DJ-program-cover">
-		<!-- 电台名称 -->
-		<div class="DJ-program-name">{{DJProgram.name}}</div>
+		
+		<div class="DJ-cover-container" @click="toDetail">
+			<!-- 电台封面 -->
+			<img :src="DJProgram.picUrl" class="DJ-program-cover">
+			<!-- 电台名称 -->
+			<div class="DJ-program-name">{{DJProgram.name}}</div>
+		</div>
 		<!-- 电台描述 -->
-		<div class="DJ-program-desc">{{DJProgram.rcmdtext}}</div>
+		<div class="DJ-program-desc" @click="toDetail">{{DJProgram.rcmdtext}}</div>
 	</div>
 </template>
 
@@ -27,6 +30,16 @@
 					width: `calc(100%/${this.columns} - 10px)`
 				}
 			}
+		},
+		methods:{
+			toDetail(){
+				this.$router.push({
+					path: '/djdetail',
+					query:{
+						id: this.DJProgram.id
+					}
+				})
+			}
 		}
 	}
 	
@@ -35,15 +48,17 @@
 <style>
 	.DJ-program-item{
 		margin-bottom: 20px;
+	}
+	.DJ-cover-container{
+		width: 100%;
+		cursor: pointer;
+		margin-bottom: 10px;
 		position: relative;
 	}
-	
 	.DJ-program-cover{
 		width: 100%;
 		display: block;
 		border-radius: 5px;
-		margin-bottom: 10px;
-		cursor: pointer;
 	}
 	.DJ-program-name{
 		width: 100%;
@@ -54,11 +69,11 @@
 		overflow: hidden;
 		color: #fff;
 		position: absolute;
-		bottom: 50px;
+		bottom: 0;
 		font-size: 13px;
 		text-indent: .5em;
 		background-image: linear-gradient(rgba(0,0,0,.05), rgba(0,0,0,.5));
-		cursor: pointer;
+		cursor: default;
 	}
 	
 	.DJ-program-desc{

@@ -1,19 +1,16 @@
 <template>
 	<!-- 独家放送视频项 -->
 	<div class="exclusive-video-item" :style="itemStyle">
-		
-		<!-- 封面 -->
-		<img :src="exclusiveVideo.sPicUrl||exclusiveVideo.cover" class="exclusive-video-cover">
-		<!-- 图标 -->
-		<div class="icon-play" v-if="playIcon"><span class="iconfont icon-bofang2"></span></div>
-		<!-- 播放量 -->
-		<div class="exclusive-video-play-count" v-if="playCount"><span class="iconfont icon-bofang1"></span> {{playCount}}</div>
-
-		
+		<div class="exclusive-video-cover-container" @click="toDetail">
+			<!-- 封面 -->
+			<img :src="exclusiveVideo.sPicUrl||exclusiveVideo.cover" class="exclusive-video-cover">
+			<!-- 图标 -->
+			<div class="icon-play" v-if="playIcon"><span class="iconfont icon-bofang2"></span></div>
+			<!-- 播放量 -->
+			<div class="exclusive-video-play-count" v-if="playCount"><span class="iconfont icon-bofang1"></span> {{playCount}}</div>
+		</div>
 		<!-- 名称 -->
-		<div class="exclusive-video-name">{{exclusiveVideo.name}}</div>
-		
-		
+		<div class="exclusive-video-name" @click="toDetail">{{exclusiveVideo.name}}</div>
 	</div>
 </template>
 
@@ -46,6 +43,16 @@
 			playCount(){
 				return this.exclusiveVideo.playCount >= 100000 ? Math.floor(this.exclusiveVideo.playCount/10000) + '万': this.exclusiveVideo.playCount;
 			}
+		},
+		methods:{
+			toDetail(){
+				this.$router.push({
+					path: '/videodetail',
+					query:{
+						id: this.exclusiveVideo.id
+					}
+				})
+			}
 		}
 	}
 	
@@ -54,7 +61,14 @@
 <style>
 	.exclusive-video-item{
 		margin-bottom: 20px;
+		
+	}
+	
+	.exclusive-video-cover-container{
 		position: relative;
+		width: 100%;
+		overflow: hidden;
+		margin-bottom: 10px;
 	}
 	
 	.exclusive-video-cover{
@@ -62,7 +76,6 @@
 		display: block;
 		border-radius: 5px;
 		cursor: pointer;
-		margin-bottom: 10px;
 	}
 	
 	.exclusive-video-name{

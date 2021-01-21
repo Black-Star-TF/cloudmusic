@@ -53,12 +53,12 @@
 				<div class="mine-comment">
 					<div class="title">评论<span class="comment-count">（{{videoInfo.commentCount}}）</span></div>
 					<!-- 评论输入框组件 -->
-					<!-- <CommentInputBoxCpn></CommentInputBoxCpn> -->
+					<InputBox></InputBox>
 				</div>
 				
 				<!-- 精彩评论 -->
 				
-				<div class="commet-container" v-if="hotCommentList&&hotCommentList.length>0">
+				<div class="comment-container" v-if="hotCommentList&&hotCommentList.length>0">
 					<div class="title">精彩评论</div>
 					<div class="comment-content">
 						<CommentItem v-for="item in hotCommentList" :commentItem="item"></CommentItem>
@@ -67,7 +67,7 @@
 				
 				<!-- 全部评论 -->
 				
-				<div class="commet-container">
+				<div class="comment-container">
 					<div class="title">最新评论</div>
 					<div class="comment-content" v-if="commentList">
 						<CommentItem v-for="item in commentList" :commentItem="item"></CommentItem>
@@ -95,7 +95,7 @@
 	import CommentItem from '@/components/common/CommentItem'
 	import PageNumBtn from '@/components/common/PageNumBtn';
 	import Loading from '@/components/common/Loading';
-	// import CommentInputBoxCpn from '@/components/CommentInputBoxCpn'
+	import InputBox from '@/components/common/InputBox';
 	export default {
 		name: 'VideoDetail',
 		data(){
@@ -119,7 +119,7 @@
 			CommentItem,
 			PageNumBtn,
 			Loading,
-			// CommentInputBoxCpn
+			InputBox
 		},
 		computed:{
 			offset(){
@@ -157,7 +157,6 @@
 		},
 		methods:{
 			skip(pageNum){
-				console.log(111);
 				this.pageNum = pageNum
 				this.commentList = null
 				this.getTotalCommentData()
@@ -175,6 +174,70 @@
 			getFocus(){
 				this.$refs.comment.focus()
 			},
+			getData(){
+				// 视频页面打开，检查音频是否播放，如果正在播放，则暂停
+				// 获取路由参数
+				if(this.$route.query.id){
+					this.videoId = this.$route.query.id
+				}
+				
+				// 判断id为视频id还是mvid
+				getMVUrl(this.videoId).then(res=>{
+					if(res.code == 200){
+						this.isMV = true
+					}else{
+						this.isMV = false
+					}
+				}).then(()=>{
+					
+					// 如果是mvid，则请求mv相关信息
+					if(this.isMV){
+						// 请求mv详情数据
+						getMVDetail(this.videoId).then(res=>{
+							this.videoDetail = res.data
+						})
+						// 请求mv点赞转发评论数
+						getMVInfo(this.videoId).then(res=>{
+							this.videoInfo = res
+						})
+						
+						// 请求mv url
+						getMVUrl(this.videoId).then(res=>{
+							this.videoUrl = res.data.url 
+						})
+						
+						// 获取mv评论
+						this.getTotalCommentData()
+					}else{
+						// 如果是视频id则请求视频相关信息
+						
+						// 获取视频详情数据
+						getVideoDetail(this.videoId).then(res=>{
+							this.videoDetail = res.data
+						})
+						
+						// 获取视频点赞转发评论数数据
+						getVideoInfo(this.videoId).then(res=>{
+							this.videoInfo = res
+						})
+						
+						//获取视频url
+						getVideoUrl(this.videoId).then(res=>{
+							this.videoUrl = res.urls[0].url
+						})
+						
+						// 获取视频评论
+						this.getTotalCommentData()
+					}
+				})
+				
+				// 请求相关视频
+				getRelativeVideo(this.videoId).then(res=>{
+					this.relativeVideoList = res.data
+				}).catch(err=>{
+					console.log('相关视频请求失败');
+				})
+			},
 			// 请求所有视频评论
 			getTotalCommentData(){
 				if(this.isMV){
@@ -188,7 +251,6 @@
 						if(!this.hotCommentList){
 							this.hotCommentList = res.hotComments
 						}
-						console.log(this.commentList);
 					})
 				}else{
 					// 视频评论
@@ -205,70 +267,14 @@
 			}
 		},
 		created(){
-			// 视频页面打开，检查音频是否播放，如果正在播放，则暂停
-			// 获取路由参数
-			if(this.$route.query.id){
-				this.videoId = this.$route.query.id
-			}
-			
-			// 判断id为视频id还是mvid
-			getMVUrl(this.videoId).then(res=>{
-				if(res.code == 200){
-					this.isMV = true
-				}else{
-					this.isMV = false
-				}
-			}).then(()=>{
-				
-				// 如果是mvid，则请求mv相关信息
-				if(this.isMV){
-					// 请求mv详情数据
-					getMVDetail(this.videoId).then(res=>{
-						this.videoDetail = res.data
-					})
-					// 请求mv点赞转发评论数
-					getMVInfo(this.videoId).then(res=>{
-						this.videoInfo = res
-					})
-					
-					// 请求mv url
-					getMVUrl(this.videoId).then(res=>{
-						console.log(res);
-						this.videoUrl = res.data.url 
-					})
-					
-					// 获取mv评论
-					this.getTotalCommentData()
-				}else{
-					// 如果是视频id则请求视频相关信息
-					
-					// 获取视频详情数据
-					getVideoDetail(this.videoId).then(res=>{
-						this.videoDetail = res.data
-					})
-					
-					// 获取视频点赞转发评论数数据
-					getVideoInfo(this.videoId).then(res=>{
-						this.videoInfo = res
-					})
-					
-					//获取视频url
-					getVideoUrl(this.videoId).then(res=>{
-						this.videoUrl = res.urls[0].url
-					})
-					
-					// 获取视频评论
-					this.getTotalCommentData()
-				}
-			})
-			
-			// 请求相关视频
-			getRelativeVideo(this.videoId).then(res=>{
-				this.relativeVideoList = res.data
-			}).catch(err=>{
-				console.log('相关视频请求失败');
-			})
-		}
+			this.getData();
+		},
+		watch: {
+		    $route(to, from) {
+		      //将数据重新加载
+					this.getData();
+		    }
+		  },
 	}
 	
 </script>
@@ -453,20 +459,16 @@
 	}
 	
 	/* 精彩评论模块样式 */
-	.commet-container{
+	.comment-container{
 		width: 100%;
 		margin: 20px 0;
 	}
 	
-	.commet-container>.title{
+	.comment-container>.title{
 		width: 100%;
 		height: 30px;
 		line-height: 30px;
 		font-size: 14px;
 		font-weight: 600;
-	}
-	
-	.commet-container>.comment-content{
-		width: 100%;
 	}
 </style>

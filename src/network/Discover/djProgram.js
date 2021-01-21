@@ -34,3 +34,13 @@ export function getDJCategoryRecommend(type){
 		}
 	})
 }
+
+// 请求电台详情
+export function getDJDetail(rid){
+	return request({
+		url: '/dj/detail',
+		params:{
+			rid
+		}
+	})
+}

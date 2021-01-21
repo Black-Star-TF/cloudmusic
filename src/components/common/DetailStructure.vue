@@ -7,7 +7,10 @@
 			<slot name="router-nav"></slot>
 		</div>
 		
-		<slot name="router-view-content"></slot>
+		<div class="detail-structure-content">
+			<slot name="router-view-content"></slot>
+		</div>
+		
 	</div>
 </template>
 
@@ -30,9 +33,10 @@
 	}
 	
 	.detail-structure-container>.detail-structure-nav-container>div{
+		font-size: 14px;
 		float: left;
 		margin: 0 20px;
-		color: #fff;
+		color: #d0d0d0;
 		position: relative;
 		cursor: pointer;
 	}
@@ -57,6 +61,11 @@
 	
 	.detail-structure-container>.detail-structure-nav-container>div.router-link-active::after{
 		background-color: #ec4141;
+	}
+	
+	
+	.detail-structure-content{
+		padding-top: 10px;
 	}
 </style>
 

@@ -1,18 +1,18 @@
 <template>
 	<!-- 全球榜单项 -->
-	<div class="global-toplist-item" :style="itemStyle">
-		<div class="toplist-cover-container">
+	<div class="global-top-list-item" :style="itemStyle">
+		<div class="top-list-cover-container">
 			<!-- 封面 -->
-			<img :src="toplistItem.coverImgUrl" class="toplist-cover">
+			<img :src="toplistItem.coverImgUrl" class="top-list-cover" @click="toDetail">
 		
 			<!-- 播放量 -->
-			<div class="toplist-play-count"><span class="iconfont icon-bofang1"></span> {{playCount}}</div>
+			<div class="top-list-play-count"><span class="iconfont icon-bofang1"></span> {{playCount}}</div>
 			<!-- 播放按钮 -->
-			<div class="toplist-play-btn"><span class="iconfont icon-bofang2"></span></div>
+			<div class="top-list-play-btn"><span class="iconfont icon-bofang2"></span></div>
 		</div>
 		
 		<!-- 榜单名称 -->
-		<div class="toplist-name">{{toplistItem.name}}</div>
+		<div class="top-list-name" @click="toDetail">{{toplistItem.name}}</div>
 	</div>
 </template>
 
@@ -37,30 +37,40 @@
 			playCount(){
 				return this.toplistItem.playCount >= 100000 ? Math.floor(this.toplistItem.playCount/10000) + '万': this.toplistItem.playCount;
 			}
+		},
+		methods:{
+			toDetail(){
+				this.$router.push({
+					path: '/playlistdetail',
+					query: {
+						id: this.toplistItem.id
+					}
+				})
+			}
 		}
 	}
 </script>
 
 <style>
-	.global-toplist-item{
+	.global-top-list-item{
 		margin-bottom: 20px;
 		position: relative;
 	}
 	
-	.toplist-cover-container{
+	.top-list-cover-container{
 		overflow: hidden;
 		position: relative;
 		margin-bottom: 10px;
 	}
 	
-	.toplist-cover{
+	.top-list-cover{
 		width: 100%;
 		display: block;
 		border-radius: 5px;
 		cursor: pointer;
 	}
 	
-	.toplist-play-btn{
+	.top-list-play-btn{
 		position: absolute;
 		width: 40px;
 		height: 40px;
@@ -76,11 +86,11 @@
 		z-index: 2;
 	}
 	
-	.toplist-cover-container:hover>.toplist-play-btn{
+	.top-list-cover-container:hover>.top-list-play-btn{
 		visibility: visible;
 	}
 	
-	.toplist-play-btn>.iconfont{
+	.top-list-play-btn>.iconfont{
 		color: red;
 		font-size: 25px;
 		line-height: 40px;
@@ -89,18 +99,18 @@
 		top: 1px;
 	}
 	
-	.toplist-name{
+	.top-list-name{
 		line-height: 20px;
 		font-size: 14px;
 		color: #D0D0D0;
 		cursor: pointer;
 	}
 	
-	.toplist-name:hover{
+	.top-list-name:hover{
 		color: #fff;
 	}
 	
-	.toplist-play-count{
+	.top-list-play-count{
 		position: absolute;
 		font-size: 12px;
 		color: #fff;
@@ -109,7 +119,7 @@
 		cursor: pointer;
 	}
 	
-	.toplist-play-count>.iconfont{
+	.top-list-play-count>.iconfont{
 		font-size: 12px;
 	}
 </style>

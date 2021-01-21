@@ -38,3 +38,28 @@ export function getPlaylistDetail(id){
 		}
 	})
 }
+
+// 请求歌单评论数据
+export function getPlaylistComment(id,limit,offset,before=null){
+	return request({
+		url: '/comment/playlist',
+		params: {
+			id,
+			limit,
+			offset,
+			before
+		}
+	})
+}
+
+// 获取歌单收藏者
+export function getPlaylistSubscriber(id,limit,offset=0){
+	return request({
+		url: '/playlist/subscribers',
+		params:{
+			id,
+			limit,
+			offset
+		}
+	})
+}

@@ -87,6 +87,9 @@ const routes = [
 	{
 		path: '/playlistdetail',
 		component: ()=>import('@/views/PlaylistDetail/PlaylistDetail'),
+		meta:{
+			keepAlive: true
+		},
 		children: [
 			{
 				path: '',
@@ -98,17 +101,32 @@ const routes = [
 			},
 			{
 				path: 'comment',
-				component: ()=>import('@/views/PlaylistDetail/PlaylistDetail')
+				component: ()=>import('@/views/PlaylistDetail/Comment')
 			},
 			{
 				path: 'subscriber',
-				component: ()=>import('@/views/PlaylistDetail/PlaylistDetail')
+				component: ()=>import('@/views/PlaylistDetail/Subscriber')
 			}
 		]
 	},
 	{
 		path: '/videodetail',
 		component: ()=>import('@/views/Video/VideoDetail')
+	},
+	{
+		path: '/djdetail',
+		component: ()=>import('@/views/DJDetail/DJDetail'),
+		meta:{keepAlive: true},
+		children:[
+			{
+				path: '',
+				redirect: 'program'
+			},
+			{
+				path: 'program',
+				component: ()=>import('@/views/DJDetail/Program'),
+			}
+		]
 	}
 ]
 

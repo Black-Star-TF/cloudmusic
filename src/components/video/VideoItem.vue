@@ -1,20 +1,28 @@
 <template>
 	<div class="video-item" :style="itemStyle">
-		<!-- 视频封面 -->
-		<img :src="video.picUrl||video.cover" class="video-cover-img" @load="load" ref="img">
+		
+		<div class="video-cover-container" @click="toDetail">
+			<!-- 视频封面 -->
+			<img :src="video.picUrl||video.cover" class="video-cover-img" @load="load" ref="img">
+			
+			<!-- 播放量 -->
+			<div class="video-play-count"><span class="iconfont icon-bofang1"></span> {{playCount}}</div>
+			
+			<!-- 文案 -->
+			<div class="video-copywriter" v-if="copywriter">{{video.copywriter}}</div>
+		</div>
+		
 		
 		<!-- 视频名称 -->
-		<div class="video-name">{{video.name}}</div>
+		<div class="video-name" @click="toDetail">{{video.name}}</div>
 		<!-- 视频作家 -->
 		<div class="video-composer">
 			<span v-for="(artist,index) in video.artists"><span class="video-composer-name">{{artist.name}}</span><span class="dilimiter" v-if="index < video.artists.length -1"> / </span></span>
 		</div>
 		
-		<!-- 播放量 -->
-		<div class="video-play-count"><span class="iconfont icon-bofang1"></span> {{playCount}}</div>
 		
-		<!-- 文案 -->
-		<div class="video-copywriter" v-if="copywriter">{{video.copywriter}}</div>
+		
+		
 	</div>
 </template>
 
@@ -30,6 +38,7 @@
 				default: 3
 			},
 			copywriter:{
+				type: Boolean,
 				default: false
 			}
 		},
@@ -38,6 +47,14 @@
 				if(this.$refs.img){
 					this.$refs.img.height = 0.56 * this.$refs.img.width;
 				}
+			},
+			toDetail(){
+				this.$router.push({
+					path: '/videodetail',
+					query:{
+						id: this.video.id
+					}
+				})
 			}
 		},
 		computed:{
@@ -57,13 +74,17 @@
 <style>
 	.video-item{
 		margin-bottom: 20px;
+	}
+	
+	.video-cover-container{
+		width: 100%;
 		position: relative;
 		overflow: hidden;
 	}
+	
 	.video-cover{
 		width: 100%;
 		height: 59%;
-		overflow: hidden;
 	}
 	.video-cover-img{
 		width: 100%;
@@ -132,19 +153,12 @@
 		cursor: pointer;
 	}
 	
-	.video-copywriter:hover{
+	.video-cover-container:hover > .video-copywriter{
 		top: 0;
 	}
 	
-	/* 使用兄弟选择器 设置鼠标移入的效果*/
-	.video-cover:hover ~ .video-copywriter{
-		top: 0;
-	}
-	
-	.video-cover:hover ~ .video-play-count{
+	.video-cover-container:hover > .video-play-count{
 		visibility: hidden;
 	}
-	/* .video-copywriter:hover ~ .video-play-count{
-		visibility: hidden;
-	} */
+
 </style>
