@@ -14,7 +14,7 @@
 			
 			<!-- 内容区 -->
 			<template slot="router-view-content">
-					<router-view :radio="radio"></router-view>
+					<router-view></router-view>
 			</template>
 		</DetailStructure>
 	</div>

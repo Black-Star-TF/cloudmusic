@@ -1,6 +1,6 @@
 <template>
 	<div class="radio-detail-header">
-		<DetailHeader>
+		<DetailHeader type="radio" :inline="inline">
 			<template slot="cover">
 				<!-- 电台封面 -->
 				<img :src="radio.picUrl" class="radio-detail-header-img">
@@ -40,6 +40,11 @@
 			radio:{
 				type: Object,
 				require: true
+			}
+		},
+		computed:{
+			inline(){
+				return this.radio.desc.indexOf('\n') == -1;
 			}
 		}
 	}

@@ -32,7 +32,7 @@
 				<!-- 是否含有SQ版本 -->
 				<!-- <span class="songItem-tag sq" v-if="song.privilege.subp=='1'&&song.originCoverType=='0'">SQ</span> -->
 				<!-- 是否有mv -->
-				<span class="songItem-tag mv" v-if="song.mv" @click="toDetail(song.mv)">MV</span>
+				<span class="songItem-tag mv" v-if="song.mv" @click="toMVDetail(song.mv)">MV</span>
 			</div>
 			
 			
@@ -51,7 +51,7 @@
 				<span class="songItem-album" @click="toAlbumDetail(song.al)">{{song.al.name}}</span>
 			</div>
 			
-			<!-- 歌手  ---需重做---   -->
+			<!-- 歌手   -->
 			<div class="singer-of-song column-item" v-if="singer">
 				<span v-for="(singer,index) in song.ar">
 					<span class="singer-name">{{singer.name}}</span>
@@ -100,15 +100,20 @@
 					
 			// 	}
 			// }
-			toAlbumDetail(){
-				
+			toAlbumDetail(album){
+				this.$router.push({
+					path: '/albumdetail',
+					query:{
+						id: album.id
+					}
+				})
 			},
 			hotStyle(song){
 				return{
 					width: `${song.pop}%`
 				}
 			},
-			toDetail(id){
+			toMVDetail(id){
 				this.$router.push({
 					path: '/videodetail',
 					query:{
@@ -151,7 +156,7 @@
 		background-color: rgb(34,34,34);
 	}
 	
-	.songItem:nth-of-type(2n-1){
+	.songItem:nth-of-type(2n){
 		background-color: rgba(255,255,255,.02);
 	}
 	
@@ -252,14 +257,22 @@
 		border: 1px solid goldenrod;
 	}
 	
+	.songItem>.hot-of-song{
+		position: relative;
+	}
+	
 	.hot-range{
 		width: 80px;
 		height: 6px;
 		border-radius: 3px;
 		background-color: rgba(255,255,255,.03);
+		position: absolute;
+		top: 50%;
+		margin-top: -3px;
 	}
 	
 	.hot-range>.hot-content{
+		
 		height: 6px;
 		border-radius: 3px;
 		background-color: rgba(255,255,255,.05);

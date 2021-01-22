@@ -57,12 +57,12 @@
 		},
 		methods:{
 			toDetail(){
-				// this.$router.push({
-				// 	path: '/videodetail',
-				// 	query:{
-				// 		id: this.mvToplistItem.id
-				// 	}
-				// })
+				this.$router.push({
+					path: '/videodetail',
+					query:{
+						id: this.mvToplistItem.id
+					}
+				})
 			}
 		}
 	}

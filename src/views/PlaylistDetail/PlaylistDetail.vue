@@ -38,10 +38,10 @@
 			PlaylistDetailHeader
 		},
 		created(){
-			this.id = this.$route.query.id
+			this.id = this.$route.query.id;
 			// 获取歌单详情数据
 			getPlaylistDetail(this.id).then(res=>{
-				this.playlist = res.playlist
+				this.playlist = res.playlist;
 			})
 		},
 		beforeRouteEnter(to,from,next){

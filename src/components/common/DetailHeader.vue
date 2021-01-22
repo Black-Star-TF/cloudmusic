@@ -10,7 +10,7 @@
 			<!-- 名称 -->
 			<div class="detail-name"><span class="detail-type"><slot name="type"></slot></span><slot name="name"></slot></div>
 			<!-- 用户 -->
-			<div class="detail-user-info">
+			<div class="detail-user-info" v-if="type=='playlist'|| type=='radio'">
 				<slot name="user-info"></slot>
 			</div>
 			<!-- 操作 -->
@@ -19,21 +19,26 @@
 			</div>
 			
 			<!-- 标签 -->
-			<div class="detail-tags">
+			<div class="detail-tags" v-if="type=='playlist'&&tags">
 				<slot name="tags"></slot>
 			</div>
+			
+			<!-- 歌手 -->
+			<div class="detail-singer" v-if="type=='album'">
+				<slot name="singer"></slot>
+			</div>
 			<!-- 播放相关信息 -->
-			<div class="play-info">
+			<div class="play-info" v-if="type=='playlist'|| type=='album'">
 				<slot name="play-info"></slot>
 			</div>
 			
 			<!-- description -->
-			<div class="desc" :class="{'show': showDesc}">
+			<div class="desc" :class="{'show': showDesc}" v-if="type=='playlist'|| type=='radio'">
 				<div class="desc-content">
 					<slot name="desc"></slot>
 				</div>
 				<!-- 收起/展开简介按钮 -->
-				<div class="btn" @click="changeDescState" :class="{'show': showDesc}"></div>
+				<div class="btn" @click="changeDescState" :class="{'show': showDesc}" v-if="!inline"></div>
 			</div>
 		</div>
 	</div>
@@ -45,6 +50,20 @@
 		data(){
 			return{
 				showDesc: false
+			}
+		},
+		props:{
+			type: {
+				type: String,
+				require: true
+			},
+			inline:{
+				type: Boolean,
+				default:false
+			},
+			tags:{
+				type: Boolean,
+				default: true
 			}
 		},
 		methods:{
@@ -169,6 +188,7 @@
 		font-size: 15px;
 		border: 1px solid #666;
 		color: #ccc;
+		cursor: pointer;
 	}
 	.detail-action>div:hover{
 		background-color: rgba(255,255,255,.05);
@@ -191,6 +211,10 @@
 		text-overflow: ellipsis;
 		white-space: pre;
 		position: relative;
+	}
+	
+	.desc>.desc-content>span{
+		color: #878787;
 	}
 	
 	.desc>.desc-content>.tag{
@@ -228,7 +252,7 @@
 		border-bottom-color: #ccc;
 	}
 
-	.detail-tags,.play-info,.desc-content{
+	.detail-tags,.play-info,.desc-content,.detail-singer{
 		height: 20px;
 		line-height: 20px;
 	}
@@ -243,6 +267,15 @@
 	}
 	
 	.play-info>span{
-		color: #aaa;
+		color: #878787;
+	}
+	
+	.detail-singer>span{
+		color: #85B9E6;
+		cursor: pointer;
+	}
+	
+	.detail-singer>span:hover{
+		color: #B3CEE5;
 	}
 </style>

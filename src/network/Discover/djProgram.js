@@ -44,3 +44,28 @@ export function getDJDetail(rid){
 		}
 	})
 }
+
+// 请求电台节目
+export function getRadioProgram(rid,limit,offset,asc){
+	return request({
+		url: '/dj/program',
+		params:{
+			rid,
+			limit,
+			offset,
+			asc
+		}
+	})
+}
+
+// 请求电台订阅者列表
+export function getRadioSubscriber(id,limit,time=null){
+	return request({
+		url: '/dj/subscriber',
+		params:{
+			id,
+			limit,
+			time
+		}
+	})
+}

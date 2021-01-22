@@ -127,6 +127,28 @@ const routes = [
 				component: ()=>import('@/views/DJDetail/Program'),
 			}
 		]
+	},
+	{
+		path: '/albumdetail',
+		component: ()=>import('@/views/AlbumDetail/AlbumDetail'),
+		children:[
+			{
+				path: '',
+				redirect: 'songlist'
+			},
+			{
+				path: 'songlist',
+				component: ()=>import('@/views/AlbumDetail/SongList')
+			},
+			{
+				path: 'comment',
+				component: ()=>import('@/views/AlbumDetail/Comment')
+			},
+			{
+				path: 'detail',
+				component: ()=>import('@/views/AlbumDetail/Detail')
+			}
+		]
 	}
 ]
 
