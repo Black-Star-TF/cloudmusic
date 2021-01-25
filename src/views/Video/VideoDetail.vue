@@ -270,11 +270,11 @@
 			this.getData();
 		},
 		watch: {
-		    $route(to, from) {
-		      //将数据重新加载
-					this.getData();
-		    }
-		  },
+			$route(to, from) {
+				//将数据重新加载
+				this.getData();
+			}
+		},
 	}
 	
 </script>

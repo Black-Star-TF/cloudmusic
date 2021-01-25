@@ -29,12 +29,12 @@
 				<!-- <span class="songItem-tag vip" v-if="song.fee=='1'">VIP</span> -->
 				<!-- 是否可以试听 -->
 				<!-- <span class="songItem-tag audition" v-if="song.fee=='1'&&!song.privilege.cp=='0'">试听</span> -->
+				
 				<!-- 是否含有SQ版本 -->
-				<!-- <span class="songItem-tag sq" v-if="song.privilege.subp=='1'&&song.originCoverType=='0'">SQ</span> -->
+				<!-- <span class="songItem-tag sq" v-if="song.originCoverType==1">SQ</span> -->
 				<!-- 是否有mv -->
 				<span class="songItem-tag mv" v-if="song.mv" @click="toMVDetail(song.mv)">MV</span>
 			</div>
-			
 			
 			<!-- 歌曲热度 -->
 			<div class="hot-of-song column-item" v-if="hot">
@@ -54,9 +54,31 @@
 			<!-- 歌手   -->
 			<div class="singer-of-song column-item" v-if="singer">
 				<span v-for="(singer,index) in song.ar">
-					<span class="singer-name">{{singer.name}}</span>
+					<span class="singer-name" @click="toArtistDetail(singer)">{{singer.name}}</span>
 					<span class="dilimiter" v-if="index < song.ar.length -1"> / </span>
 				</span>
+			</div>
+			
+			<!-- 歌词 -->
+			<div class="lyric-of-song" :class="{'show': arr[index]}" v-if="lyric">
+				<span class="songItem-lyric" v-html="lyrics(song)"></span>
+				
+				<div class="lyric-option1 lyric-option">
+					<div class="btn-show" @click="changeLyricState(index)">
+						<span v-if="!arr[index]">展开歌词</span>
+						<span v-else>收起歌词</span>
+					</div>
+					<div class="btn-copy">复制歌词</div>
+				</div>
+				
+				<div class="lyric-option2 lyric-option">
+					<div class="btn-show" @click="changeLyricState(index)">
+						<span v-if="!arr[index]">展开歌词</span>
+						<span v-else>收起歌词</span>
+					</div>
+					<div class="btn-copy">复制歌词</div>
+				</div>
+				
 			</div>
 		</div>
 	</div>
@@ -67,10 +89,15 @@
 		name: 'SongListTab',
 		data(){
 			return{
-				currentIndex: -1
+				currentIndex: -1,
+				arr: []
 			}
 		},
 		props:{
+			lyric:{
+				type: Boolean,
+				default: false
+			},
 			songs:{
 				type: Array,
 				require: true
@@ -93,6 +120,27 @@
 			}
 		},
 		methods:{
+			toArtistDetail(singer){
+				this.$router.push({
+					path: '/artistdetail',
+					query:{
+						id: singer.id
+					}
+				})
+			},
+			changeLyricState(index){
+				let temp = this.arr[index]
+				this.arr.splice(index,1,!temp)
+				console.log(this.arr[index]);
+				console.log(index);
+			},
+			lyrics(song){
+				if(song.lyrics){
+					return song.lyrics.join('\n');
+				}else{
+					return '';
+				}
+			},
 			// hasAudition(song,index){
 			// 	if(song.privilege){
 			// 		return 
@@ -122,7 +170,7 @@
 				})
 			},
 			itemClick(index){
-				this.currentIndex = index
+				this.currentIndex = index;
 			},
 			play(song){
 				// 修改当前播放歌曲id
@@ -133,11 +181,18 @@
 		},
 		filters:{
 			duration(dt){
-				let sec = Math.floor(dt/1000)
-				let minutes = Math.floor(sec/60)
-				let seconds = sec%60
-				return `${ minutes > 10 ? minutes : "0"+minutes}:${seconds>=10 ? seconds : "0"+seconds}`
+				let sec = Math.floor(dt/1000);
+				let minutes = Math.floor(sec/60);
+				let seconds = sec%60;
+				return `${ minutes > 10 ? minutes : "0"+minutes}:${seconds>=10 ? seconds : "0"+seconds}`;
 			}
+		},
+		created(){
+			for(const song of this.songs){
+				// song.showLyric = false;
+				this.arr.push(false)
+			}
+			
 		}
 	}
 </script>
@@ -146,10 +201,18 @@
 	
 	.table-row{
 		font-size: 13px;
-		height: 35px;
 		color: #888;
-		padding-left: 2.5%;
 		cursor: default;
+		overflow: hidden;
+		box-sizing: border-box;
+	}
+	
+	
+	.title-container.table-row{
+		height: 35px;
+	}
+	.songItem.table-row{
+		height: auto;
 	}
 	
 	.table-row.songItem{
@@ -177,16 +240,81 @@
 		white-space: nowrap;
 	}
 	
+	.lyric-of-song{
+		width: 100%;
+		overflow: hidden;
+		padding-bottom: 20px;
+		box-sizing: border-box;
+		position: relative;
+	}
+	
+	.lyric-of-song>.lyric-option{
+		position: absolute;
+		left: 72%;
+		top: 10px;
+		width: 190px;
+	}
+	
+	.lyric-of-song>.lyric-option2{
+		display: none;
+		top: auto;
+		bottom: 20px;
+	}
+	
+	.lyric-of-song.show>.lyric-option2{
+		display: block;
+		top: auto;
+		bottom: 20px;
+	}
+	
+	.lyric-of-song>.lyric-option>.btn-show,.lyric-of-song>.lyric-option>.btn-copy{
+		text-align: center;
+		width: 80px;
+		height: 24px;
+		line-height: 24px;
+		border-radius: 12px;
+		border: .5px solid #555;
+		color: #d0d0d0;
+		cursor: pointer;
+		float: left;
+		margin-left: 10px;
+	}
+	
+	.lyric-of-song>.lyric-option>.btn-show:hover,.lyric-of-song>.lyric-option>.btn-copy:hover{
+		background-color: rgba(255,255,255,.05);
+	}
+
+	
+	.lyric-of-song>.songItem-lyric>b{
+		line-height: 30px;
+		font-weight: 400;
+	}
+	
+	.lyric-of-song>.songItem-lyric{
+		display: inline-block;
+		white-space: pre-wrap;
+		margin-left: 110px;
+		height: 90px;
+		line-height: 20px;
+		overflow: hidden;
+	}
+	
+	.lyric-of-song.show>.songItem-lyric{
+		height: auto;
+	}
+
 	.operation-of-song{
-		width: 6%;
+		width: 100px;
+		padding-left: 30px;
+		box-sizing: border-box;
 		display: flex;
 		justify-content: space-between;
-		margin-right: 1%;
+		margin-right: 10px;
 		color: #666;
 	}
 	
 	.name-of-song{
-		width: 27%;
+		width: calc(41% - 110px);
 		margin-right: 2%;
 	}
 	
@@ -198,7 +326,7 @@
 	
 	.album-of-song{
 		float: right;
-		width: 23%;
+		width: 18%;
 		margin-right: 2%;
 	}
 	
@@ -278,11 +406,12 @@
 		background-color: rgba(255,255,255,.05);
 	}
 	
-	.songItem-album,.singer-name{
+	.album-of-song .songItem-album,.singer-of-song .singer-name{
 		cursor: pointer;
+		color: #888;
 	}
 	
-	.singer-name:hover,.songItem-album:hover{
+	.singer-of-song .singer-name:hover,.album-of-song .songItem-album:hover{
 		color: #aaa;
 	}
 </style>

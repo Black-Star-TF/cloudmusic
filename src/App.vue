@@ -33,15 +33,18 @@
 			Content,
 			ControlBar
 		},
-		mounted(){
-			
+		watch:{
+			$route(to, from) {
+				//将数据重新加载
+				// console.log(this.$router)
+			}
 		}
 	}
 </script>
 
 <style>
 	/* 引入字体图标样式 */
-	@import url("//at.alicdn.com/t/font_2271023_hru77r2q2o.css");
+	@import url("//at.alicdn.com/t/font_2271023_c3gmbejttsu.css");
 	
 	*{
 		padding: 0;

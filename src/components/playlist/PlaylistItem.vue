@@ -3,7 +3,7 @@
 	<div class="playlist-item" :style="itemStyle">
 		<!-- 歌单封面 -->
 		<div class="playlist-cover-container">
-			<img :src="playlist.picUrl||playlist.coverImgUrl" class="playlist-cover" @click="toDetail">
+			<img :src="playlist.picUrl||playlist.coverImgUrl" class="playlist-cover" @click="toPlaylistDetail">
 			
 			<!-- 播放按钮 -->
 			<div class="playlist-play-btn"><span class="iconfont icon-bofang2"></span></div>
@@ -16,7 +16,7 @@
 		</div>
 		
 		<!-- 歌单名称 -->
-		<div class="playlist-name" @click="toDetail">{{playlist.name}}</div>
+		<div class="playlist-name" @click="toPlaylistDetail">{{playlist.name}}</div>
 		<!-- 播放量 -->
 		<div class="playlist-play-count"><span class="iconfont icon-bofang1"></span> {{playCount}}</div>
 		
@@ -38,10 +38,14 @@
 			showCreator:{
 				type: Boolean,
 				default: true
+			},
+			index:{
+				type: Number,
+				require: true
 			}
 		},
 		methods:{
-			toDetail(){
+			toPlaylistDetail(){
 				this.$router.push({
 					path: '/playlistdetail',
 					query: {
@@ -52,8 +56,13 @@
 		},
 		computed:{
 			itemStyle(){
+				let mr = '20px'
+				if( (this.index + 1) % this.columns == 0){
+					mr = 0
+				}
 				return{
-					width: `calc(100%/${this.columns} - 10px)`
+					width: `calc((100% - ${this.columns - 1} * 20px) / ${this.columns})`,
+					marginRight: mr
 				}
 			},
 			playCount(){

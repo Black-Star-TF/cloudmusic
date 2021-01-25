@@ -3,11 +3,10 @@
 		<!-- 歌手分类导航 -->
 		<TypeNav :category="category" :currentCategory="currentCategory" @typechange="change"></TypeNav>
 		<!-- 歌手列表 -->
-		<CategoryModule>
-			<template slot="content">
-				<!-- <SingerListItem v-for="singer in singerList" :singer="singer" v-if="singerList"></SingerListItem> -->
-			</template>
-		</CategoryModule>
+		
+		<div class="singer-list-container">
+			<!-- <SingerListItem v-for="(singer,index) in singerList" :index="index" :singer="singer" v-if="singerList"></SingerListItem> -->
+		</div>
 		<Loading v-if="!singerList"></Loading>
 	</div>
 </template>
@@ -38,9 +37,10 @@
 					'area': '-1',
 					'initial': '-1'
 				},
-				limit: 30,
+				limit: 24,
 				pageNum: 1,
-				singerList: null
+				singerList: null,
+				timer: null
 			}
 		},
 		methods:{
@@ -73,6 +73,14 @@
 					this.pageNum ++;
 					this.getSingerListData();
 				}
+			},
+			throttle(){
+				if (this.timer == null) {
+					this.timer = setTimeout(()=>{
+						this.getMoreData()
+						this.timer = null;
+					}, 2000);
+				}
 			}
 		},
 		computed:{
@@ -86,11 +94,18 @@
 		},
 		mounted(){
 			// 为滚动元素添加鼠标滚轮事件
-			this.$root.$children[0].$refs.content.$refs.main.addEventListener('scroll',this.getMoreData);
+			this.$root.$children[0].$refs.content.$refs.main.addEventListener('scroll',this.throttle);
 		}
 	}
 	
 </script>
 
 <style>
+	
+	.singer-list-container{
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: start;
+		margin-top: 20px;
+	}
 </style>

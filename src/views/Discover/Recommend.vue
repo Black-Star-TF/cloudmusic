@@ -5,9 +5,11 @@
 		
 		<!-- 推荐歌单 -->
 		<CategoryModule  v-if="show">
-			<template slot="title"><div class="link">推荐歌单</div></template>
+			<template slot="title">
+				<router-link to="/discover/playlist" tag="div" class="link">推荐歌单</router-link>
+			</template>
 			<template slot="content">
-				<PlaylistItem v-for="playlist in recommendPlaylists" :playlist="playlist" :showCreator="false"></PlaylistItem>
+				<PlaylistItem v-for="(playlist,index) in recommendPlaylists" :index="index" :playlist="playlist" :showCreator="false"></PlaylistItem>
 			</template>
 		</CategoryModule>
 		
@@ -15,7 +17,7 @@
 		<CategoryModule  v-if="show">
 			<template slot="title"><div class="link">独家放送</div></template>
 			<template slot="content">
-				<ExclusiveVideoItem v-for="exclusiveVideo in exclusiveVideos" :exclusiveVideo="exclusiveVideo" playIcon></ExclusiveVideoItem>
+				<ExclusiveVideoItem v-for="(exclusiveVideo,index) in exclusiveVideos" :index="index" :exclusiveVideo="exclusiveVideo" playIcon></ExclusiveVideoItem>
 			</template>
 		</CategoryModule>
 		
@@ -23,18 +25,22 @@
 		
 		<!-- 推荐MV -->
 		<CategoryModule  v-if="show">
-			<template slot="title"><div class="link">推荐MV</div></template>
+			<template slot="title">
+				<router-link to="/video/mv" tag="div" class="link">推荐MV</router-link>
+			</template>
 			<template slot="content">
-				<VideoItem v-for="(video,index) in recommendMVList"  v-if="index < 3" :video="video" copywriter></VideoItem>
+				<VideoItem v-for="(video,index) in recommendMVList" :index="index" v-if="index < 3" :video="video" copywriter></VideoItem>
 			</template>
 		</CategoryModule>
 		
 		
 		<!-- 主播电台 -->
 		<CategoryModule  v-if="show">
-			<template slot="title"><div class="link">主播电台</div></template>
+			<template slot="title">
+				<router-link to="/discover/djprogram" tag="div" class="link">主播电台</router-link>
+			</template>
 			<template slot="content">
-				<DJProgramItem v-for="DJProgram in recommendDJPrograms" :DJProgram="DJProgram"></DJProgramItem>
+				<DJProgramItem v-for="(DJProgram,index) in recommendDJPrograms" :index="index" :DJProgram="DJProgram"></DJProgramItem>
 			</template>
 		</CategoryModule>
 		
@@ -111,10 +117,11 @@
 </script>
 
 <style>
-	.link{
+	div.link{
+		font-size: 20px;
 		cursor: pointer;
 	}
-	.link:hover{
+	div.link:hover{
 		color: #fff;
 	}
 </style>

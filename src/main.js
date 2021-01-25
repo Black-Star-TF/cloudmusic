@@ -10,6 +10,7 @@ const loadimage = require('./assets/img/artist.jpg')
 Vue.use(VueLazyload, {
   preLoad: 1,
   loading: loadimage,
+	error: loadimage
 })
 
 Vue.config.productionTip = false

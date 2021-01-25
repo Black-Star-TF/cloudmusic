@@ -8,7 +8,7 @@
 			<TypeNav :category="category" :currentCategory="currentCategory" @typechange="change"></TypeNav>
 			
 			<div class="mv-container" v-if="MVList">
-				<VideoItem v-for="video in MVList" :video="video" :columns="4"></VideoItem>
+				<VideoItem v-for="(video,index) in MVList" :index="index" :video="video" :columns="4"></VideoItem>
 			</div>
 			<!-- 页码导航 -->
 			<PageNumBtn :pageNum="pageNum" :totalPage="totalPage" @pagebtnclick="turnPage" v-if="MVList"></PageNumBtn>

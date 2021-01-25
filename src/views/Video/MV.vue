@@ -11,7 +11,7 @@
 				</div>
 			</template>
 			<template slot="content">
-				<VideoItem v-for="video in newestMV" :video="video" :columns="4" v-if="newestMV"></VideoItem>
+				<VideoItem v-for="(video,index) in newestMV" :index="index" :video="video" :columns="4" v-if="newestMV"></VideoItem>
 				<Loading v-else></Loading>
 			</template>
 		</CategoryModule>
@@ -22,7 +22,7 @@
 				<router-link :to="{path: '/totalmv', query: {order: '最热'}}" tag="div" class="title">热播MV</router-link>
 			</template>
 			<template slot="content">
-				<VideoItem v-for="video in hotMV" :video="video" :columns="4" v-if="hotMV"></VideoItem>
+				<VideoItem v-for="(video,index) in hotMV" :index="index" :video="video" :columns="4" v-if="hotMV"></VideoItem>
 				<Loading v-else></Loading>
 			</template>
 		</CategoryModule>
@@ -33,7 +33,7 @@
 				<router-link :to="{path: '/totalmv', query: {order: '最新', type: '网易出品'}}" tag="div" class="title">网易出品</router-link>
 			</template>
 			<template slot="content">
-				<ExclusiveVideoItem v-for="exclusiveVideo in exclusiveMV" :exclusiveVideo="exclusiveVideo" :columns="4" showPlayCount v-if="exclusiveMV"></ExclusiveVideoItem>
+				<ExclusiveVideoItem v-for="(exclusiveVideo,index) in exclusiveMV" :index="index" :exclusiveVideo="exclusiveVideo" :columns="4" showPlayCount v-if="exclusiveMV"></ExclusiveVideoItem>
 				<Loading v-else></Loading>
 			</template>
 		</CategoryModule>

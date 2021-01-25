@@ -11,15 +11,15 @@
 		<CategoryModule v-if="show">
 			<template slot="title"><div class="link">付费精品</div></template>
 			<template slot="content">
-				<PayRadioItem v-for="DJPayItem in DJPayList" :DJPayItem="DJPayItem"></PayRadioItem>
+				<PayRadioItem v-for="(DJPayItem,index) in DJPayList" :index="index" :DJPayItem="DJPayItem"></PayRadioItem>
 			</template>
 		</CategoryModule>
 		
 		<!-- 电台个性推荐内容-->
 		<CategoryModule v-if="show">
-			<template slot="title">电台个性推荐</template>
+			<template slot="title"><div class="link">电台个性推荐</div></template>
 			<template slot="content">
-				<DJProgramItem v-for="recommendDJ in recommendDJList" :DJProgram="recommendDJ"></DJProgramItem>
+				<DJProgramItem v-for="(recommendDJ,index) in recommendDJList" :index="index" :DJProgram="recommendDJ"></DJProgramItem>
 			</template>
 		</CategoryModule>
 		
@@ -27,7 +27,7 @@
 		<CategoryModule v-for="DJCate in DJCategoryCommendList" v-if="show">
 			<template slot="title"><div class="link">{{DJCate.name}}</div></template>
 			<template slot="content">
-				<DJProgramItem v-for="(DJProgram,index) in DJCate.DJPrograms" :DJProgram="DJProgram" v-if="index<6"></DJProgramItem>
+				<DJProgramItem v-for="(DJProgram,index) in DJCate.DJPrograms" :index="index" :DJProgram="DJProgram" v-if="index<6"></DJProgramItem>
 			</template>
 		</CategoryModule>
 	</div>
@@ -101,7 +101,7 @@
 
 <style>
 	.link{
-		cursor: pointer;
+		/* cursor: pointer; */
 	}
 	.link:hover{
 		color: #fff;

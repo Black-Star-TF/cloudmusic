@@ -7,9 +7,9 @@
 			</template>
 			
 			<!-- 导航栏 -->
-			<template slot="router-nav">
+			<template slot="router-nav" v-if="radio">
 				<router-link :to="{ path: '/djdetail/program', query: {id}}" tag="div">节目</router-link>
-				<!-- <router-link :to="{ path: '/playlistdetail/comment', query: {id}}" tag="div">订阅者({{playlist.commentCount}})</router-link> -->
+				<router-link :to="{ path: '/djdetail/subscriber', query: {id}}" tag="div">订阅者({{radio.subCount}})</router-link>
 			</template>
 			
 			<!-- 内容区 -->
@@ -37,9 +37,9 @@
 			DJDetailHeader
 		},
 		created(){
-			this.id = this.$route.query.id
+			this.id = this.$route.query.id;
 			getDJDetail(this.id).then(res=>{
-				this.radio = res.data
+				this.radio = res.data;
 			})
 		}
 	}

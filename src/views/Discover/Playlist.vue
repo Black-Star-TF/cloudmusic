@@ -23,7 +23,7 @@
 			
 			<template slot="content">
 				<!-- 歌单列表 -->
-				<PlaylistItem v-for="playlist in playlists" :playlist="playlist" v-if="playlists"></PlaylistItem>
+				<PlaylistItem v-for="(playlist,index) in playlists" :index="index" :playlist="playlist" v-if="playlists"></PlaylistItem>
 			</template>
 		</CategoryModule>
 		

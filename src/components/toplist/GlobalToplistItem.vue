@@ -3,7 +3,7 @@
 	<div class="global-top-list-item" :style="itemStyle">
 		<div class="top-list-cover-container">
 			<!-- 封面 -->
-			<img :src="toplistItem.coverImgUrl" class="top-list-cover" @click="toDetail">
+			<img :src="toplistItem.coverImgUrl" class="top-list-cover" @click="toPlaylistDetail">
 		
 			<!-- 播放量 -->
 			<div class="top-list-play-count"><span class="iconfont icon-bofang1"></span> {{playCount}}</div>
@@ -12,7 +12,7 @@
 		</div>
 		
 		<!-- 榜单名称 -->
-		<div class="top-list-name" @click="toDetail">{{toplistItem.name}}</div>
+		<div class="top-list-name" @click="toPlaylistDetail">{{toplistItem.name}}</div>
 	</div>
 </template>
 
@@ -26,12 +26,21 @@
 			},
 			columns:{
 				default: 5
+			},
+			index:{
+				type: Number,
+				require: true
 			}
 		},
 		computed:{
 			itemStyle(){
+				let mr = '20px'
+				if( (this.index + 1) % this.columns == 0){
+					mr = 0
+				}
 				return{
-					width: `calc(100%/${this.columns} - 10px)`
+					width: `calc((100% - ${this.columns - 1} * 20px) / ${this.columns})`,
+					marginRight: mr
 				}
 			},
 			playCount(){
@@ -39,7 +48,7 @@
 			}
 		},
 		methods:{
-			toDetail(){
+			toPlaylistDetail(){
 				this.$router.push({
 					path: '/playlistdetail',
 					query: {

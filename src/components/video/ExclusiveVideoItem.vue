@@ -1,7 +1,7 @@
 <template>
 	<!-- 独家放送视频项 -->
 	<div class="exclusive-video-item" :style="itemStyle">
-		<div class="exclusive-video-cover-container" @click="toDetail">
+		<div class="exclusive-video-cover-container" @click="toVideoDetail">
 			<!-- 封面 -->
 			<img :src="exclusiveVideo.sPicUrl||exclusiveVideo.cover" class="exclusive-video-cover">
 			<!-- 图标 -->
@@ -10,7 +10,7 @@
 			<div class="exclusive-video-play-count" v-if="playCount"><span class="iconfont icon-bofang1"></span> {{playCount}}</div>
 		</div>
 		<!-- 名称 -->
-		<div class="exclusive-video-name" @click="toDetail">{{exclusiveVideo.name}}</div>
+		<div class="exclusive-video-name" @click="toVideoDetail">{{exclusiveVideo.name}}</div>
 	</div>
 </template>
 
@@ -32,12 +32,21 @@
 			showPlayCount:{
 				type: Boolean,
 				default: false
+			},
+			index:{
+				type: Number,
+				require: true
 			}
 		},
 		computed:{
 			itemStyle(){
+				let mr = '20px'
+				if( (this.index + 1) % this.columns == 0){
+					mr = 0
+				}
 				return{
-					width: `calc(100%/${this.columns} - 10px)`
+					width: `calc((100% - ${this.columns - 1} * 20px) / ${this.columns})`,
+					marginRight: mr
 				}
 			},
 			playCount(){
@@ -45,7 +54,7 @@
 			}
 		},
 		methods:{
-			toDetail(){
+			toVideoDetail(){
 				this.$router.push({
 					path: '/videodetail',
 					query:{

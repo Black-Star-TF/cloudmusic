@@ -125,6 +125,10 @@ const routes = [
 			{
 				path: 'program',
 				component: ()=>import('@/views/DJDetail/Program'),
+			},
+			{
+				path: 'subscriber',
+				component: ()=>import('@/views/DJDetail/Subscriber'),
 			}
 		]
 	},
@@ -149,6 +153,78 @@ const routes = [
 				component: ()=>import('@/views/AlbumDetail/Detail')
 			}
 		]
+	},
+	{
+		path: '/search',
+		component: ()=>import('@/views/Search'),
+		children:[
+			{
+				path: '',
+				redirect: 'single'
+			},
+			{
+				path: 'single',
+				component: ()=>import('@/views/Search/Single')
+			},
+			{
+				path: 'singer',
+				component: ()=>import('@/views/Search/Singer')
+			},
+			{
+				path: 'album',
+				component: ()=>import('@/views/Search/Album')
+			},
+			{
+				path: 'video',
+				component: ()=>import('@/views/Search/Video')
+			},
+			{
+				path: 'playlist',
+				component: ()=>import('@/views/Search/Playlist')
+			},
+			{
+				path: 'radio',
+				component: ()=>import('@/views/Search/Radio')
+			},
+			{
+				path: 'user',
+				component: ()=>import('@/views/Search/User')
+			},
+			{
+				path: 'lyric',
+				component: ()=>import('@/views/Search/Lyric')
+			}
+		]
+	},
+	{
+		path: '/artistdetail',
+		component: ()=>import('@/views/ArtistDetail/ArtistDetail'),
+		children:[
+			{
+				path: '',
+				redirect: 'album'
+			},
+			{
+				path: 'album',
+				component: ()=>import('@/views/ArtistDetail/Album'),
+			},
+			{
+				path: 'mv',
+				component: ()=>import('@/views/ArtistDetail/MV'),
+			},
+			{
+				path: 'desc',
+				component: ()=>import('@/views/ArtistDetail/Description'),
+			},
+			{
+				path: 'similar',
+				component: ()=>import('@/views/ArtistDetail/SimilarArtist'),
+			}
+		]
+	},
+	{
+		path: '/userdetail',
+		component: ()=>import('@/views/UserDetail/UserDetail')
 	}
 ]
 

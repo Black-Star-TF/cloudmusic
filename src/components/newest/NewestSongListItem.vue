@@ -7,11 +7,11 @@
 		<div class="new-song-name">{{newSongItem.name}}</div>
 		<div class="new-song-artists">
 			<span class="new-song-artist-item" v-for="(artistItem,index) in newSongItem.artists">
-				<span class="new-song-artist-name">{{artistItem.name}}</span>
+				<span class="new-song-artist-name" @click="toArtistDetail(artistItem)">{{artistItem.name}}</span>
 				<span class="dilimiter" v-if="index < newSongItem.artists.length - 1">/</span>
 			</span>
 		</div>
-		<div class="new-song-album">
+		<div class="new-song-album" @click="toAlbumDetail">
 			<span class="new-song-album-name">{{newSongItem.album.name}}</span>
 			<span class="new-song-album-alia" v-if="newSongItem.transNames">（{{newSongItem.transNames[0]}}）</span>
 		</div>
@@ -41,6 +41,22 @@
 			}
 		},
 		methods:{
+			toAlbumDetail(){
+				this.$router.push({
+					path: '/albumdetail',
+					query:{
+						id: this.newSongItem.album.id
+					}
+				})
+			},
+			toArtistDetail(singer){
+				this.$router.push({
+					path: '/artistdetail',
+					query:{
+						id: singer.id
+					}
+				})
+			},
 			play(){
 				// 修改当前播放歌曲id
 				// this.$store.commit('setCurrentSongId',{songId: this.newSongItem.id})

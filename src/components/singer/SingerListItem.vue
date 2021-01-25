@@ -21,6 +21,10 @@
 			},
 			columns: {
 				default: 6
+			},
+			index:{
+				type: Number,
+				require: true
 			}
 		},
 		methods:{
@@ -34,8 +38,13 @@
 		},
 		computed:{
 			itemStyle(){
+				let mr = '20px'
+				if( (this.index + 1) % this.columns == 0){
+					mr = 0
+				}
 				return{
-					width: `calc(100%/${this.columns} - 10px)`
+					width: `calc((100% - ${this.columns - 1} * 20px) / ${this.columns})`,
+					marginRight: mr
 				}
 			}
 		}

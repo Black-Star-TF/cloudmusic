@@ -16,7 +16,7 @@
 		<CategoryModule>
 			<template slot="title">全球榜</template>
 			<template slot="content">
-				<GlobalToplistItem v-for="(toplist,index) in songToplists" :toplistItem="toplist" v-if="songToplists && index >=4"></GlobalToplistItem>
+				<GlobalToplistItem v-for="(toplist,index) in songToplists" :index="index-4" :toplistItem="toplist" v-if="songToplists && index >=4"></GlobalToplistItem>
 			</template>
 		</CategoryModule>
 	</div>

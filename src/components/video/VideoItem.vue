@@ -1,9 +1,9 @@
 <template>
 	<div class="video-item" :style="itemStyle">
 		
-		<div class="video-cover-container" @click="toDetail">
+		<div class="video-cover-container" @click="toVideoDetail">
 			<!-- 视频封面 -->
-			<img :src="video.picUrl||video.cover" class="video-cover-img" @load="load" ref="img">
+			<img :src="video.picUrl||video.cover||video.imgurl16v9" class="video-cover-img" @load="load" ref="img">
 			
 			<!-- 播放量 -->
 			<div class="video-play-count"><span class="iconfont icon-bofang1"></span> {{playCount}}</div>
@@ -14,14 +14,11 @@
 		
 		
 		<!-- 视频名称 -->
-		<div class="video-name" @click="toDetail">{{video.name}}</div>
+		<div class="video-name" @click="toVideoDetail">{{video.name}}</div>
 		<!-- 视频作家 -->
 		<div class="video-composer">
 			<span v-for="(artist,index) in video.artists"><span class="video-composer-name">{{artist.name}}</span><span class="dilimiter" v-if="index < video.artists.length -1"> / </span></span>
 		</div>
-		
-		
-		
 		
 	</div>
 </template>
@@ -40,15 +37,19 @@
 			copywriter:{
 				type: Boolean,
 				default: false
+			},
+			index:{
+				type: Number,
+				require: true
 			}
 		},
 		methods:{
 			load(){
 				if(this.$refs.img){
-					this.$refs.img.height = 0.56 * this.$refs.img.width;
+					// this.$refs.img.height = 0.56 * this.$refs.img.width;
 				}
 			},
-			toDetail(){
+			toVideoDetail(){
 				this.$router.push({
 					path: '/videodetail',
 					query:{
@@ -59,8 +60,13 @@
 		},
 		computed:{
 			itemStyle(){
+				let mr = '20px'
+				if( (this.index + 1) % this.columns == 0){
+					mr = 0
+				}
 				return{
-					width: `calc(100%/${this.columns} - 10px)`
+					width: `calc((100% - ${this.columns - 1} * 20px) / ${this.columns})`,
+					marginRight: mr
 				}
 			},
 			playCount(){

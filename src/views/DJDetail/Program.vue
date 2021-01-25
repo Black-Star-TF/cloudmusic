@@ -4,8 +4,8 @@
 		<div class="radio-program-page-header">
 			<span class="radio-program-count">共{{radioProgramCount}}期</span>
 			<span class="radio-program-sortord">
-				<span>升序</span>
-				<span>降序</span>
+				<span @click="descend">降序</span>
+				<span @click="ascend">升序</span>
 			</span>
 		</div>
 		
@@ -50,6 +50,18 @@
 			}
 		},
 		methods:{
+			ascend(){
+				if(!this.asc){
+					this.asc = true,
+					this.getRadioProgramData()
+				}
+			},
+			descend(){
+				if(this.asc){
+					this.asc = false,
+					this.getRadioProgramData()
+				}
+			},
 			skip(pageNum){
 				this.pageNum = pageNum
 				this.getRadioProgramData()
@@ -86,9 +98,9 @@
 	
 	.radio-program-count{
 		display: inline-block;
-		margin: 0 2.5%;
+		margin-left: 30px;
 		font-size: 12px;
-		color: #ccc;
+		color: #878787;
 	}
 	
 	.radio-program-sortord{

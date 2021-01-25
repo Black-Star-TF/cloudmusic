@@ -93,7 +93,7 @@
 		margin-top: 15px;
 		width: 100%;
 		display: flex;
-		justify-content: space-between;
+		justify-content: start;
 		flex-wrap: wrap;
 	}
 </style>

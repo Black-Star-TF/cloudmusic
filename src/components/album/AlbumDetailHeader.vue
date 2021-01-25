@@ -19,7 +19,7 @@
 		</template>
 		
 		<template slot="singer">
-			歌手：<span>{{album.artist.name}}</span>
+			歌手：<span @click="toArtistDetail">{{album.artist.name}}</span>
 		</template>
 		
 		<template slot="play-info">
@@ -46,7 +46,17 @@
 			publishTime(){
 				return formatDate1(this.album.publishTime)
 			}
-		}
+		},
+		methods: {
+			toArtistDetail(singer){
+				this.$router.push({
+					path: '/artistdetail',
+					query:{
+						id: this.album.artist.id
+					}
+				})
+			},
+		},
 	}
 	
 </script>

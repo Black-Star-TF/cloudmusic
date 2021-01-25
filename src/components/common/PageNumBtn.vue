@@ -1,5 +1,5 @@
 <template>
-	<div class="page-num-nav-container">
+	<div class="page-num-nav-container" v-if="totalPage>1">
 		<!-- 上一页 -->
 		<div class="page-num-nav-btn-item prev" @click="skipPage(currentPage-1)" :class="{'disabled': currentPage==1}"> < </div>
 		<!-- 第一页 -->

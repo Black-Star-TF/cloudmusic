@@ -2,7 +2,7 @@
 	<div class="top-list-item-container clear-fix">
 		<div class="top-list-item-cover-container">
 			<!-- 封面图片 -->
-			<img :src="toplistItem.coverImgUrl||toplistItem.coverUrl" class="top-list-item-img" @click="toDetail">
+			<img :src="toplistItem.coverImgUrl||toplistItem.coverUrl" class="top-list-item-img" @click="toPlaylistDetail">
 			<!-- 播放按钮 -->
 			<div class="top-list-play-btn"><span class="iconfont icon-bofang2"></span></div>
 		</div>
@@ -13,7 +13,7 @@
 				<span class="song-name">{{song.first}}</span>
 				<span class="song-artist">{{song.second}}</span>
 			</div>
-			<div class="more-of-top-list-item" @click="toDetail">查看全部></div>
+			<div class="more-of-top-list-item" @click="toPlaylistDetail">查看全部></div>
 		</div>
 	</div>
 </template>
@@ -28,7 +28,7 @@
 			}
 		},
 		methods:{
-			toDetail(){
+			toPlaylistDetail(){
 				this.$router.push({
 					path: '/playlistdetail',
 					query: {

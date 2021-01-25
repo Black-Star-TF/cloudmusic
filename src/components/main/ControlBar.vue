@@ -1,5 +1,11 @@
 <template>
-	<div class="app-controlbar"></div>
+	<div class="app-controlbar">
+		<!-- 当前播放歌曲信息 -->
+		
+		<!-- 音乐播放控件 -->
+		
+		<!-- 当前播放列表 -->
+	</div>
 </template>
 
 <script>

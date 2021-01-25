@@ -1,5 +1,5 @@
 <template>
-	<div class="dj-pay-container" :style="payRadioItemStyle">
+	<div class="dj-pay-container" :style="itemStyle">
 		<!--付费电台封面 -->
 		<div class="dj-pay-cover">
 			<img :src="DJPayItem.picUrl" class="dj-pay-img" @load="show" v-show="hasImg">
@@ -35,13 +35,22 @@
 			},
 			height:{
 				default: 150
+			},
+			index:{
+				type: Number,
+				require: true
 			}
 		},
 		computed:{
-			payRadioItemStyle(){
+			itemStyle(){
+				let mr = '20px'
+				if( (this.index + 1) % this.columns == 0){
+					mr = 0
+				}
 				return{
-					width: `calc(100%/${this.columns} - 20px)`,
-					height: `${this.height}px`
+					width: `calc((100% - ${this.columns - 1} * 20px) / ${this.columns})`,
+					height: `${this.height}px`,
+					marginRight: mr
 				}
 			}
 		},

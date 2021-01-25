@@ -8,7 +8,7 @@
 		<!-- 详情 -->
 		<div class="detail-header-info">
 			<!-- 名称 -->
-			<div class="detail-name"><span class="detail-type"><slot name="type"></slot></span><slot name="name"></slot></div>
+			<div class="detail-name"><span class="detail-type" v-if="type!='singer'"><slot name="type"></slot></span><slot name="name"></slot></div>
 			<!-- 用户 -->
 			<div class="detail-user-info" v-if="type=='playlist'|| type=='radio'">
 				<slot name="user-info"></slot>
@@ -28,7 +28,7 @@
 				<slot name="singer"></slot>
 			</div>
 			<!-- 播放相关信息 -->
-			<div class="play-info" v-if="type=='playlist'|| type=='album'">
+			<div class="play-info" v-if="type=='playlist'|| type=='album'|| type=='singer'">
 				<slot name="play-info"></slot>
 			</div>
 			
@@ -82,9 +82,7 @@
 		vertical-align:text-bottom;
 		color: #fff;
 		cursor: default;
-		width: 95%;
-		margin: 40px auto;
-		margin-top: 30px;
+		margin: 30px 20px 30px 30px;
 		color: #d0d0d0;
 	}
 	
@@ -92,12 +90,16 @@
 		width: 180px;
 		height: 180px;
 		float: left;
+		overflow: hidden;
+		border-radius: 5px;
 	}
 	
 	.detail-header-cover>img{
-		width: 100%;
-		display: block;
-		border-radius: 5px;
+		/* width: 100%; */
+		text-align: center;
+		height: 100%;
+		display: inline-block;
+		
 	}
 	
 	.detail-header-info{
