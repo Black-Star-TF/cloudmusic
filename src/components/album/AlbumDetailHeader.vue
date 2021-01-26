@@ -12,7 +12,7 @@
 		
 		<!-- 歌单操作 -->
 		<template slot="action">
-			<div class="play">播放全部</div>
+			<div class="play" @click="playAll">播放全部</div>
 			<div>收藏</div>
 			<div>VIP下载</div>
 			<div>分享</div>
@@ -48,6 +48,9 @@
 			}
 		},
 		methods: {
+			playAll(){
+				this.$emit('playallclick')
+			},
 			toArtistDetail(singer){
 				this.$router.push({
 					path: '/artistdetail',

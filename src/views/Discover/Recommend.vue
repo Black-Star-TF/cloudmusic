@@ -29,7 +29,7 @@
 				<router-link to="/video/mv" tag="div" class="link">推荐MV</router-link>
 			</template>
 			<template slot="content">
-				<VideoItem v-for="(video,index) in recommendMVList" :index="index" v-if="index < 3" :video="video" copywriter></VideoItem>
+				<VideoItem v-for="(video,index) in recommendMVList" :index="index" v-if="index < 4" :video="video" :columns="4" copywriter></VideoItem>
 			</template>
 		</CategoryModule>
 		

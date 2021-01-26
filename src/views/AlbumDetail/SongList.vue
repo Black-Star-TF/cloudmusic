@@ -25,7 +25,7 @@
 </script>
 
 <style>
-	.song-list-page-container{
+	.song-list-container{
 		width: 100%;
 		overflow: hidden;
 		padding-bottom: 30px;

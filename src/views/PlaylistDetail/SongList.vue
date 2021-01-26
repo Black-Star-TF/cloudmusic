@@ -36,6 +36,9 @@
 				for(let i = 0; i < this.songList.length; i++){
 					this.songList[i].privilege = res.privileges[i]
 				}
+				
+				// 将获取到的数据传给父组件
+				this.$emit('getsonglist',this.songList)
 			})
 		}
 	}

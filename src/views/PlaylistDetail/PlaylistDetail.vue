@@ -3,7 +3,7 @@
 		<!-- 头部信息 -->
 		<DetailStructure v-if="playlist">
 			<template slot="header">
-				<PlaylistDetailHeader :playlist="playlist" type="playlist" v-if="playlist"></PlaylistDetailHeader>
+				<PlaylistDetailHeader :playlist="playlist" type="playlist" v-if="playlist" @playallclick="playAll"></PlaylistDetailHeader>
 			</template>
 			
 			<!-- 导航栏 -->
@@ -15,7 +15,7 @@
 			
 			<!-- 内容区 -->
 			<template slot="router-view-content">
-					<router-view :playlist="playlist"></router-view>
+					<router-view :playlist="playlist" @getsonglist="setSongList"></router-view>
 			</template>
 		</DetailStructure>
 	</div>
@@ -30,12 +30,21 @@
 		data(){
 			return{
 				id: null,
-				playlist: null
+				playlist: null,
+				songList: null
 			}
 		},
 		components:{
 			DetailStructure,
 			PlaylistDetailHeader
+		},
+		methods:{
+			setSongList(songList){
+				this.songList = songList
+			},
+			playAll(){
+				this.$store.dispatch('playAll',this.songList)
+			}
 		},
 		created(){
 			this.id = this.$route.query.id;

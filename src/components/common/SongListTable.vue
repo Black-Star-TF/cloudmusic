@@ -11,11 +11,13 @@
 		</div>
 		
 		<!-- 歌曲 -->
-		<div class="table-row songItem" v-for="(song,index) in songs" :class="{'activeItem': index==currentIndex}" @click="itemClick(index)" @dblclick="play(song)">
+		<div class="table-row songItem" v-for="(song,index) in songs" :key="song.id" :class="{'activeItem': index==currentIndex}" @click="itemClick(index)" @dblclick="play(song)">
 			
 			<!-- 对歌曲的操作 -->
 			<div class="operation-of-song column-item">
-				<span>{{index+1 >= 10 ? index+1: "0"+(index+1)}}</span>
+				<span v-if="song.id==songId" style="color: red;">播</span>
+				<span v-else>{{index+1 >= 10 ? index+1: "0"+(index+1)}}</span>
+				
 				<span class="iconfont icon-xihuan"></span>
 				<span class="iconfont icon-xiazai"></span>
 			</div>
@@ -119,6 +121,11 @@
 				default: false
 			}
 		},
+		computed: {
+			songId() {
+				return this.$store.state.currentSong.id
+			}
+		},
 		methods:{
 			toArtistDetail(singer){
 				this.$router.push({
@@ -173,10 +180,8 @@
 				this.currentIndex = index;
 			},
 			play(song){
-				// 修改当前播放歌曲id
-				// this.$store.commit('setCurrentSongId',{songId: song.id})
 				// 播放歌曲
-				// this.$store.dispatch('play')
+				this.$store.dispatch('play',song)
 			}
 		},
 		filters:{
@@ -189,7 +194,6 @@
 		},
 		created(){
 			for(const song of this.songs){
-				// song.showLyric = false;
 				this.arr.push(false)
 			}
 			

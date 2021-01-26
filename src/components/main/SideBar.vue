@@ -1,5 +1,5 @@
 <template>
-	<div class="app-sidebar">
+	<div class="app-sidebar scroll">
 		<!-- 侧边导航栏包括  -->
 		
 		<!-- <slot></slot> -->
@@ -60,16 +60,5 @@
 		background-color: rgba(255,255,255,.05);
 	}
 	
-	/* 设置侧边导航栏滚动条样式 */
-	.app-sidebar::-webkit-scrollbar{
-		width: 5px;
-		height: 1px;
-	}
-	
-	 /*滚动条里面小方块*/
-	.app-sidebar::-webkit-scrollbar-thumb{
-	border-radius: 10px;
-	box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
-	background: #3c3c3c;
-	}
+
 </style>

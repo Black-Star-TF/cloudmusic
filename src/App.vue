@@ -44,7 +44,7 @@
 
 <style>
 	/* 引入字体图标样式 */
-	@import url("//at.alicdn.com/t/font_2271023_c3gmbejttsu.css");
+	@import url("//at.alicdn.com/t/font_2271023_s95ayzlc4y.css");
 	
 	*{
 		padding: 0;
@@ -57,4 +57,16 @@
 		clear: both;
 	}
 
+	/* 设置滚动条样式 */
+	.scroll::-webkit-scrollbar{
+		width: 5px;
+		height: 1px;
+	}
+	
+	 /*滚动条里面小方块*/
+	.scroll::-webkit-scrollbar-thumb{
+	border-radius: 10px;
+	box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+	background: #3c3c3c;
+	}
 </style>

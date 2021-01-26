@@ -9,3 +9,14 @@ export function getSongDetail(ids){
 		}
 	})
 }
+
+// 请求音乐url
+
+export function getSongUrl(id){
+	return request({
+		url: '/song/url',
+		params:{
+			id
+		}
+	})
+}
