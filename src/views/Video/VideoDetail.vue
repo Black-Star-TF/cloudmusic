@@ -267,6 +267,10 @@
 			}
 		},
 		created(){
+			this.$store.commit('changePaused',true);
+			setTimeout(()=>{
+				this.$store.commit('changePaused',false);
+			},100)
 			this.getData();
 		},
 		watch: {

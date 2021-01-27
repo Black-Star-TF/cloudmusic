@@ -13,7 +13,7 @@
 			<keep-alive>
 				<router-view  v-if="$route.meta.keepAlive"></router-view>
 			</keep-alive>
-			<router-view ></router-view>
+			<router-view v-if="!$route.meta.keepAlive"></router-view>
 		</Content>
 		
 		<!-- 底部播放控件 -->
@@ -33,11 +33,28 @@
 			Content,
 			ControlBar
 		},
-		watch:{
-			$route(to, from) {
-				//将数据重新加载
-				// console.log(this.$router)
+		methods: {
+			saveData() {
+				localStorage.setItem("currentSong",JSON.stringify(this.$store.state.currentSong))
+				localStorage.setItem("playlist",JSON.stringify(this.$store.state.currentPlaylist))
+				localStorage.setItem("history",JSON.stringify(this.$store.state.history))
 			}
+		},
+		created(){
+			// 页面打开读取播放列表和播放历史数据
+			if(localStorage.playlist && localStorage.currentSong&&localStorage.history){
+				let playlist = JSON.parse(localStorage.getItem("playlist"));
+				let currentSong = JSON.parse(localStorage.getItem("currentSong"));
+				let history = JSON.parse(localStorage.getItem("history"));
+				this.$store.commit('getLocalData',{playlist,currentSong,history})
+			}
+			
+			// 页面关闭前保存播放列表和播放历史
+			window.addEventListener('beforeunload', this.saveData)
+		},
+		destroyed(){
+			// 移除事件
+			window.addEventListener('beforeunload', this.saveData)
 		}
 	}
 </script>

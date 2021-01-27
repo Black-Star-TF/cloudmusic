@@ -1,5 +1,6 @@
 <template>
-	<div class="app-controlbar">
+	<div class="app-controlbar" @click.stop>
+		
 		<!-- 当前播放歌曲信息 -->
 		<div class="current-song-detail">
 			<img :src="currentSongAvatar" class="current-song-cover">
@@ -10,20 +11,27 @@
 				</div>
 			</div>
 		</div>
-		<!-- 音乐播放控件 -->
+		
+		<!-- 音频播放控件 -->
 		<AudioControls :url="currentSongUrl" @nextsong="nextSong" @lastsong="lastSong"></AudioControls>
 		
 		<!-- 播放列表按钮  声音控制 -->
 		<div class="btn-control">
-			<!-- 播放列表 -->
+			<!-- 播放列表控制按钮 -->
 			<span class="iconfont icon-juxing" @click="shangePlaylistStatus"></span>
 		</div>
 		<!-- 当前播放列表 -->
 		<PlaylistPanel v-if="showPlaylist"></PlaylistPanel>
+		
+		<!-- 歌词面板 -->
+		<!-- <div class="lyric-panel scroll">
+			{{lyric}}
+		</div> -->
 	</div>
 </template>
 
 <script>
+	import {getSongLyric} from '@/network/Discover/song';
 	import PlaylistPanel from '@/components/main/PlaylistPanel';
 	import AudioControls from '@/components/main/AudioControls'
 	export default {
@@ -31,7 +39,8 @@
 		data(){
 			return {
 				audio: null,
-				showPlaylist: false
+				showPlaylist: false,
+				lyric: ''
 			}
 		},
 		components: {
@@ -48,8 +57,7 @@
 			},
 			// 下一首
 			nextSong(){
-				// this.$store.commit('playNextSong');
-				console.log(this.currentSong.ar);
+				this.$store.commit('playNextSong');
 			},
 		},
 		computed: {
@@ -71,6 +79,13 @@
 			currentSongSingers(){
 				return this.currentSong ? this.currentSong.ar :'';
 			}
+		},
+		created(){
+			document.addEventListener('click', ()=>{
+				if(this.showPlaylist){
+					this.showPlaylist = false
+				}
+			})
 		}
 	}
 	
@@ -158,10 +173,18 @@
 		cursor: pointer;
 	}
 	
-	
-	
 	.btn-control>span:hover{
 		color: #fff;
+	}
+	
+	.lyric-panel{
+		position: absolute;
+		width: 500px;
+		height: 300px;
+		overflow: auto;
+		background-color: #000000;
+		color: #fff;
+		bottom: 70px;
 	}
 
 </style>

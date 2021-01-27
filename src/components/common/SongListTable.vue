@@ -123,7 +123,7 @@
 		},
 		computed: {
 			songId() {
-				return this.$store.state.currentSong.id
+				return this.$store.state.currentSong ? this.$store.state.currentSong.id : null;
 			}
 		},
 		methods:{

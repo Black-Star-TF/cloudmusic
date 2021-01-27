@@ -111,7 +111,8 @@ const routes = [
 	},
 	{
 		path: '/videodetail',
-		component: ()=>import('@/views/Video/VideoDetail')
+		component: ()=>import('@/views/Video/VideoDetail'),
+		meta:{keepAlive:false}
 	},
 	{
 		path: '/djdetail',
