@@ -93,10 +93,11 @@
 
 <style>
 	.app-controlbar{
+		width: 100%;
 		color: #d0d0d0;
 		position: absolute;
 		bottom: 0;
-		width: 100%;
+		min-width: 920px;
 		height: 70px;
 		background-color: rgb(34,34,34);
 		box-sizing: border-box;
@@ -107,7 +108,7 @@
 	
 	.current-song-detail{
 		height: 69px;
-		width: 300px;
+		min-width: 300px;
 	}
 	
 	.current-song-cover{
@@ -161,7 +162,7 @@
 	}
 	
 	.btn-control{
-		width: 300px;
+		min-width: 300px;
 		height: 69px;
 		line-height: 69px;
 	}

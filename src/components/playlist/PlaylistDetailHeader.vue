@@ -77,7 +77,10 @@
 				return this.playlist.creator;
 			},
 			inline(){
-				return this.playlist.description.indexOf('\n') == -1;
+				if(this.playlist.description){
+					return this.playlist.description.indexOf('\n') == -1;
+				}
+				return true
 			}
 		},
 		methods:{

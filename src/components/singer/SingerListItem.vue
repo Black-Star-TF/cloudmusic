@@ -1,11 +1,11 @@
 <template>
 	<div class="singer-list-item" :style="itemStyle">
 		<!-- 歌手照片 -->
-		<img v-lazy="singer.img1v1Url" class="sing-avatar" @load="load" ref="img">
+		<img v-lazy="singer.img1v1Url" class="sing-avatar" @load="load" ref="img" @click="toArtistDetail">
 		<!-- 歌手名称 -->
 		<div class="singer-name-container">
 			<!-- 账户标识 -->
-			<span class="singer-name">{{singer.name}}</span>
+			<span class="singer-name" @click="toArtistDetail">{{singer.name}}</span>
 			<div class="singer-count" v-if="singer.accountId"><span class="iconfont icon-yonghu"></span></div>
 		</div>
 	</div>
@@ -34,7 +34,15 @@
 				if(img.width!=img.height){
 					img.height = img.width;
 				}
-			}
+			},
+			toArtistDetail(){
+				this.$router.push({
+					path: '/artistdetail',
+					query:{
+						id: this.singer.id
+					}
+				})
+			},
 		},
 		computed:{
 			itemStyle(){

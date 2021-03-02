@@ -26,6 +26,7 @@
 	import SideBar from'@/components/main/SideBar'
 	import Content from '@/components/main/Content'
 	import ControlBar from '@/components/main/ControlBar'
+	
 	export default{
 		components:{
 			Header,
@@ -51,9 +52,15 @@
 			
 			// 页面关闭前保存播放列表和播放历史
 			window.addEventListener('beforeunload', this.saveData)
+	
+			// 取消鼠标按下的默认事件
+			document.addEventListener('mousedown',(e)=>{
+				e.preventDefault()
+			})
+			
 		},
 		destroyed(){
-			// 移除事件
+			// 关闭页面前保存数据
 			window.addEventListener('beforeunload', this.saveData)
 		}
 	}
@@ -66,6 +73,12 @@
 	*{
 		padding: 0;
 		margin: 0;
+	}
+	#app{
+		min-width: 1100px;
+		position: relative;
+		width: 100vw;
+		height: 100vh;
 	}
 	
 	.clearfix::after{

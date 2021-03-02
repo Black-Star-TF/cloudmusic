@@ -32,13 +32,14 @@
 			<span class="progress-range" @mousedown="changePlayTime" ref="range">
 				<div class="progress-range-pole" ref="progress" :style="{width: progressWidth+'px'}"><span class="right"></span></div>
 			</span>
+			
 			<!-- 歌曲时长 -->
 			<span>{{duration | format}}</span>
 		</div>
 		<audio :src="url" autoplay ref="audio" @canplay="setDuration" @play="onPlay" @pause="onPause" @ended="ended"></audio>
 		
-		
 		<div class="lyric-panel" v-if="showLyric">{{currentLrc}}</div>
+		
 	</div>
 </template>
 
@@ -251,7 +252,7 @@
 <style scoped>
 	.audio-controls{
 		height: 69px;
-		width: 500px;
+		min-width: 500px;
 	}
 	
 	.audio-controls>.audio-controls-switch{

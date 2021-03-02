@@ -1,7 +1,7 @@
 <template>
 	<div class="comment-input-box">
 		<div class="letter-num" :class="{'red': letterNum < 0}">{{letterNum}}</div>
-		<textarea name="comment" id="comment" ref="comment" @click.stop="getFocus" @mousedown.stop @input="input"></textarea>
+		<textarea name="comment" id="comment" ref="comment" @click.stop @mousedown.stop @input="input"></textarea>
 		<div class="commit">
 			<div class="left">
 				<span class="iconfont icon-xiaolian-01"></span>
@@ -24,20 +24,15 @@
 		methods:{
 			input(e){
 				this.letterNum = 140 - e.target.value.length
-			},
-			getFocus(){
-				this.$refs.comment.focus()
 			}
 		},
 		mounted(){
-			setTimeout(()=>{
-				document.addEventListener('click',()=>{
-					// 控制文本框的焦点
-					if(this.$refs.comment===document.activeElement){
-						this.$refs.comment.blur()
-					}
-				})
-			},500)
+			document.addEventListener('click',()=>{
+				// 控制文本框的焦点
+				if(this.$refs.comment===document.activeElement){
+					this.$refs.comment.blur()
+				}
+			})
 		}
 	}
 	

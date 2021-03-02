@@ -39,13 +39,23 @@
 			DetailStructure,
 			SingerDetailHeader
 		},
+		methods:{
+			getData(){
+				this.id = this.$route.query.id;
+					
+				getSingerDetail(this.id).then(res=>{
+					this.singer = res.data.artist;
+				})
+			}
+		},
 		created(){
-			this.id = this.$route.query.id;
-				
-			getSingerDetail(this.id).then(res=>{
-				this.singer = res.data.artist;
-			})
-		}
+			this.getData()
+		},
+		watch: {
+			$route(to,from){
+				this.getData()
+			}
+		},
 	}
 	
 </script>

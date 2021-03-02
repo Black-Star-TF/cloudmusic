@@ -138,8 +138,6 @@
 			changeLyricState(index){
 				let temp = this.arr[index]
 				this.arr.splice(index,1,!temp)
-				console.log(this.arr[index]);
-				console.log(index);
 			},
 			lyrics(song){
 				if(song.lyrics){

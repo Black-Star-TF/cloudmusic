@@ -9,12 +9,58 @@
 		<router-link to="/2" tag="div" class="menu-item">直播</router-link>
 		<router-link to="/3" tag="div" class="menu-item">私人FM</router-link>
 		<!-- 登录后显示我的歌单 -->
+		<div class="title-my-playlist" @click="showPlaylist">创建的歌单</div>
+		<div class="playlist-item" v-for="item in playlists" v-if="show" @click="toPlaylistDetail(item.id)">{{item.name}}</div>
+		<div class="title-my-playlist">收藏的歌单</div>
 	</div>
 </template>
 
 <script>
+	import {getUserPlaylist} from '@/network/Login/login'
 	export default {
-		name: 'SideBar'
+		name: 'SideBar',
+		data(){
+			return {
+				playlists: [],
+				show: false
+			}
+		},
+		computed: {
+			uid() {
+				return this.$store.state.uid
+			}
+		},
+		methods: {
+			toPlaylistDetail(id){
+				this.$router.push({
+					path: '/playlistdetail',
+					query: {
+						id
+					}
+				})
+			},
+			getPlaylist() {
+				getUserPlaylist(this.uid).then(res=>{
+					this.playlists = res.playlist;
+					console.log(this.playlists);
+				})
+			},
+			showPlaylist(){
+				this.show = !this.show;
+			}
+		},
+		created(){
+			if(this.uid){
+				this.getPlaylist();
+			}
+		},
+		watch: {
+			uid(val) {
+				if(val){
+					this.getPlaylist();
+				}
+			}
+		},
 	}
 	
 </script>
@@ -39,17 +85,20 @@
 		overflow-y: auto;
 	}
 	
-	.menu-item{
+	.app-sidebar>div{
 		width: 90%;
 		height: 40px;
 		line-height: 40px;
 		margin: 1% auto;
-		font-size: 17px;
 		padding-left: 10px;
 		box-sizing: border-box;
 	}
 	
-	.menu-item:hover{
+	.menu-item{
+		font-size: 16px;
+	}
+	
+	.app-sidebar>.menu-item:hover,.app-sidebar>.playlist-item:hover{
 		background-color: #333;
 		color: #fff;
 	}
@@ -60,5 +109,13 @@
 		background-color: rgba(255,255,255,.05);
 	}
 	
+	.title-my-playlist{
+		font-size: 13px;
+		color: #666;
+	}
+	
+	.playlist-item{
+		font-size: 14px;
+	}
 
 </style>

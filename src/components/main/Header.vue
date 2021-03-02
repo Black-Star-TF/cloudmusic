@@ -9,22 +9,48 @@
 			<span class="forward iconfont icon-right" @click="goForward"></span>
 		</div>
 		
+		<!-- 搜索框 -->
 		<div class="serach-box">
-			<input type="text" class="search" placeholder="搜索" @keydown.enter="search" v-model.trim="keyword">
+			<input type="text" class="search" placeholder="搜索" @keydown.enter="search" v-model.trim="keyword" @mousedown.stop ref="searchBox" @click.stop>
 			<span class="iconfont icon-shous" @click="search"></span>
 		</div>
+		
+		<!-- 登录 -->
+		<!-- <div class="login">
+			<span @click="openPanel" v-if="!logined">未登录</span>
+			<span v-else>已登录</span>
+		</div> -->
+		
+		<!-- 登录面板 -->
+		<!-- <Login :panel="showPanel" @close="closePanel"></Login> -->
 	</div>
 </template>
 
 <script>
+	import Login from '@/components/main/Login'
 	export default {
 		name: 'Header',
 		data(){
 			return {
-				keyword: ''
+				keyword: '',
+				showPanel: false
 			}
 		},
+		computed: {
+			logined() {
+				return this.$store.state.logined;
+			}
+		},
+		components: {
+			Login
+		},
 		methods:{
+			closePanel(){
+				this.showPanel = false;
+			},
+			openPanel(){
+				this.showPanel = true;
+			},
 			search(){
 				if(this.keyword!=''){
 					this.$router.push({
@@ -41,6 +67,12 @@
 			goForward(){
 				this.$router.go(1);
 			}
+		},
+		created(){
+			// 点击输入框外的地方，输入框失去焦点
+			document.addEventListener('click',()=>{
+				this.$refs.searchBox.blur()
+			})
 		}
 	}
 </script>
@@ -54,7 +86,6 @@
 		background-color: rgb(34,34,34);
 		text-align: center;
 		line-height: 60px;
-		
 	}
 	
 	.app-header::after{
@@ -130,7 +161,20 @@
 		color: #d0d0d0;
 	}
 	
+	/* placehlder样式 */
 	.serach-box>input.search::-webkit-input-placeholder {
 		color: #555;
+	}
+	
+	.login{
+		height: 100%;
+		line-height: 60px;
+		float: right;
+		color: #fff;
+	}
+	
+	.login>span{
+		cursor: pointer;
+		font-size: 12px;
 	}
 </style>

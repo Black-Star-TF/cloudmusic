@@ -24,22 +24,32 @@
 		components:{
 			SongListTable
 		},
-		created(){
-			// 获取歌曲详情
-			let songId = [];
-			for (let trackId of this.playlist.trackIds){
-				songId.push(trackId.id);
-			}
-			let ids = songId.join(',');
-			getSongDetail(ids).then(res=>{
-				this.songList = res.songs;
-				for(let i = 0; i < this.songList.length; i++){
-					this.songList[i].privilege = res.privileges[i]
+		methods:{
+			getData(){
+				// 获取歌曲详情
+				let songId = [];
+				for (let trackId of this.playlist.trackIds){
+					songId.push(trackId.id);
 				}
-				
-				// 将获取到的数据传给父组件
-				this.$emit('getsonglist',this.songList)
-			})
+				let ids = songId.join(',');
+				getSongDetail(ids).then(res=>{
+					this.songList = res.songs;
+					for(let i = 0; i < this.songList.length; i++){
+						this.songList[i].privilege = res.privileges[i]
+					}
+					
+					// 将获取到的数据传给父组件
+					this.$emit('getsonglist',this.songList)
+				})
+			}
+		},
+		created(){
+			this.getData()
+		},
+		watch:{
+			playlist(val){
+				this.getData()
+			}
 		}
 	}
 </script>

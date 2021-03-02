@@ -83,6 +83,7 @@
 		overflow: hidden;
 		position: relative;
 		margin-bottom: 10px;
+		
 	}
 	
 	.playlist-cover{
@@ -102,12 +103,14 @@
 		right: 10px;
 		text-align: center;
 		cursor: pointer;
-		visibility: hidden;
+		/* visibility: hidden; */
+		display: none;
 		z-index: 2;
 	}
 	
 	.playlist-cover-container:hover>.playlist-play-btn{
-		visibility: visible;
+		/* visibility: visible; */
+		display: block;
 	}
 	
 	.playlist-play-btn>.iconfont{

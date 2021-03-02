@@ -1,5 +1,6 @@
 <template>
-	<div class="content-discover">
+	<div class="content-discover
+	">
 		<!-- 发现音乐页面的顶部导航栏 -->
 		<nav class="discover-nav">
 			<router-link to="/discover/recommand" class="discover-nav-item" tag="div">个性推荐</router-link>
@@ -14,7 +15,6 @@
 		<div class="discover-content">
 			<router-view></router-view>
 		</div>
-		
 	</div>
 </template>
 

@@ -44,14 +44,17 @@
 			},
 			playAll(){
 				this.$store.dispatch('playAll',this.songList)
+			},
+			getData(){
+				this.id = this.$route.query.id;
+				// 获取歌单详情数据
+				getPlaylistDetail(this.id).then(res=>{
+					this.playlist = res.playlist;
+				})
 			}
 		},
 		created(){
-			this.id = this.$route.query.id;
-			// 获取歌单详情数据
-			getPlaylistDetail(this.id).then(res=>{
-				this.playlist = res.playlist;
-			})
+			this.getData()
 		},
 		beforeRouteEnter(to,from,next){
 			// to.meta.keepAlive = true;
@@ -65,7 +68,13 @@
 		beforeRouteLeave(to,from,next){
 			// from.meta.keepAlive = false
 			next()
-		}
+		},
+		watch: {
+			$route(to, from) {
+				//将数据重新加载
+				this.getData();
+			}
+		},
 	}
 	
 </script>

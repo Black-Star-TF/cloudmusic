@@ -6,6 +6,10 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+		// 用户id
+		uid: null,
+		// 登录状态
+		logined: false,
 		// 歌词
 		lyric: '',
 		paused: false,
@@ -18,6 +22,17 @@ export default new Vuex.Store({
 		historyLength: 50
   },
   mutations: {
+		// 登录 改变状态
+		login(state,uid){
+			this.state.logined = true
+			this.state.uid = uid
+		},
+		// 退出登录
+		logout(state){
+			this.state.logined = false
+			this.state.uid = null
+		},
+		
 		// 设置歌词
 		setLyric(state,lyric){
 			state.lyric = lyric;
@@ -36,7 +51,9 @@ export default new Vuex.Store({
 		},
 		// 从本地存储获取数据
 		getLocalData(state,data){
-			this.commit('setCurrentSong',data.currentSong)
+			if(data.currentSong!=null){
+				this.commit('setCurrentSong',data.currentSong)
+			}
 			state.currentPlaylist = data.playlist;
 			state.history = data.history;
 		},
