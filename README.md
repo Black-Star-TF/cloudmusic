@@ -31,11 +31,10 @@ npm run serve
 - 使用vuex管理当前播放歌曲、播放列表和历史记录，
 
 #### 效果展示
-
-![image](./img/1.png)
-![image](./img/2.png)
-![image](./img/3.png)
-![image](./img/4.png)
-![image](./img/5.png)
-![image](./img/6.png)
-![image](./img/7.png)
+![image](img/1.png)
+![image](img/2.png)
+![image](img/3.png)
+![image](img/4.png)
+![image](img/5.png)
+![image](img/6.png)
+![image](img/7.png)
