@@ -32,10 +32,10 @@ npm run serve
 
 #### 效果展示
 
-![image](https://github.com/Black-Star-TF/cloudmusic/edit/master/img/1.png)
-![image](https://github.com/Black-Star-TF/cloudmusic/edit/master/img/2.png)
-![image](https://github.com/Black-Star-TF/cloudmusic/edit/master/img/3.png)
-![image](https://github.com/Black-Star-TF/cloudmusic/edit/master/img/4.png)
-![image](https://github.com/Black-Star-TF/cloudmusic/edit/master/img/5.png)
-![image](https://github.com/Black-Star-TF/cloudmusic/edit/master/img/6.png)
-![image](https://github.com/Black-Star-TF/cloudmusic/edit/master/img/7.png)
+![image](./img/1.png)
+![image](./img/2.png)
+![image](./img/3.png)
+![image](./img/4.png)
+![image](./img/5.png)
+![image](./img/6.png)
+![image](./img/7.png)
